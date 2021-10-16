@@ -30,8 +30,8 @@ const sidebar = async (req = request, res = response) => {
                 icon: "document-lock-outline",
             },
             {
-                title: "Mensajes",
-                link: "/panel/messages",
+                title: "Reportes",
+                link: "/panel/reports",
                 icon: "chatbubble-outline",
             },
             { title: "Pedidos", link: "/panel/orders", icon: "cart-outline" },

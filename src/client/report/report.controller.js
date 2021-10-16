@@ -1,19 +1,19 @@
 const { response, request } = require("express");
-const Message = require("../../models/message.model");
+const Report = require("../../models/report.model");
 
-const createMessage = async (req = request, res = response) => {
-    const addMessage = req.body;
+const createReport = async (req = request, res = response) => {
+    const addReport = req.body;
     const client = req.uid;
 
     try {
-        const newMessage = new Message(addMessage);
-        newMessage.client = client;
-        await newMessage.save();
+        const newReport = new Report(addReport);
+        newReport.client = client;
+        await newReport.save();
 
         res.json({
             ok: true,
             msg: "Mensaje enviado",
-            message: newMessage,
+            report: newReport,
         });
     } catch (error) {
         console.log(error);
@@ -25,5 +25,5 @@ const createMessage = async (req = request, res = response) => {
 };
 
 module.exports = {
-    createMessage,
+    createReport,
 };

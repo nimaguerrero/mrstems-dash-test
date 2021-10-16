@@ -107,11 +107,11 @@ const getOrder = async (req = request, res = response) => {
     try {
         const order = await Sale.findById(id).populate(
             "client",
-            "name lastname"
+            "name lastname email"
         );
-        const details = await SaleDetail.findById(id).populate(
-            "products",
-            "name cover subtotal price category stars"
+        const details = await SaleDetail.find({ nsale: id }).populate(
+            "tag",
+            "name price premium link"
         );
         res.json({
             ok: true,
@@ -129,13 +129,12 @@ const getOrder = async (req = request, res = response) => {
 
 const updateStateOrder = async (req = request, res = response) => {
     const id = req.params.id;
-    const state = req.params.state;
+    const { state, email, link } = req.body;
     try {
-        const sale = await Sale.findByIdAndUpdate(id, { $set: { state } });
+        await Sale.findByIdAndUpdate(id, { $set: { state } });
         res.json({
             ok: true,
-            order,
-            details,
+            msg: "Envio de link exitoso",
         });
     } catch (error) {
         console.log(error);

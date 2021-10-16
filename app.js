@@ -60,8 +60,7 @@ app.use("/admins/users", admins.AdminUserRoutes);
 app.use("/admins/home", admins.AdminHomeRoutes);
 
 // User
-app.use("/users/coupons", users.UserCouponRoutes);
-app.use("/users/messages", users.UserMessageRoutes);
+app.use("/users/reports", users.UserReportRoutes);
 app.use("/users/songs", users.UserSongRoutes);
 app.use("/users/tags", users.UserTagRoutes);
 app.use("/users/orders", users.UserOrderRoutes);
@@ -71,9 +70,9 @@ app.use("/users", users.UserRoutes);
 app.use("/clients", clients.ClientRoutes);
 app.use("/clients/settings", clients.ClientSettingRoutes);
 app.use("/clients/orders", clients.ClientOrderRoutes);
-app.use("/clients/messages", clients.ClientMessageRoutes);
+app.use("/clients/reports", clients.ClientReportRoutes);
 app.use("/clients/reviews", clients.ClientReviewRoutes);
-// app.use("/clients/products", clients.ClientProductRoutes);
+app.use("/clients/songs", clients.ClientSongRoutes);
 
 // Sidebar
 app.use("/sidebar", SidebarRoutes);

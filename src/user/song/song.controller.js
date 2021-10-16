@@ -2,6 +2,7 @@ const { response, request } = require("express");
 const fs = require("fs-extra"); //soporte a las promesas
 const { v4: uuid_v4 } = require("uuid");
 const Song = require("../../models/song.model");
+const Tag = require("../../models/tag.model");
 const {
     conditionPrevious,
     conditionNext,
@@ -9,6 +10,23 @@ const {
 } = require("../../helpers/pages.helper");
 
 const cloudinary = require("cloudinary");
+
+const getAllSongs = async (req = request, res = response) => {
+    try {
+        const songs = await Song.find({}, { name: 2, _id: 1 });
+
+        res.json({
+            ok: true,
+            songs,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error inesperado... revisar logs",
+        });
+    }
+};
 
 const getSongsByPage = async (req = request, res = response) => {
     const term = req.query.term;
@@ -198,10 +216,12 @@ const deactivateSong = async (req = request, res = Response) => {
 
 const deleteSong = async (req = request, res = Response) => {
     const id = req.params.id;
-    const public_id = req.params.public_id;
+    const pid = req.params.pid;
+    const public_id = `mrstems/songs/${pid}`;
     try {
         await Song.findByIdAndDelete(id);
         await cloudinary.v2.uploader.destroy(public_id);
+        await Tag.deleteMany({ song: id });
         res.json({
             ok: true,
             msg: "Cancion eliminada",
@@ -216,6 +236,7 @@ const deleteSong = async (req = request, res = Response) => {
 };
 
 module.exports = {
+    getAllSongs,
     getSongsByPage,
     getSong,
     createSong,

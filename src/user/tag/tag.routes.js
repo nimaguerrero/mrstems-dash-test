@@ -1,7 +1,7 @@
 const { Router } = require("express");
 
 const {
-    getTags,
+    getTagsByPage,
     getTag,
     createTag,
     updateTag,
@@ -14,7 +14,7 @@ const { validateUSER_or_ADMIN } = require("../../middlewares/role.middleware");
 
 const router = Router();
 
-router.get("/:songID", [validateJWT, validateUSER_or_ADMIN], getTags);
+router.get("/paginado", [validateJWT, validateUSER_or_ADMIN], getTagsByPage);
 router.get("/:id", [validateJWT, validateUSER_or_ADMIN], getTag);
 
 router.post("/", [validateJWT, validateUSER_or_ADMIN], createTag);

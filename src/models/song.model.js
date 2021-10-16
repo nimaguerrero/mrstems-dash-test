@@ -12,7 +12,6 @@ const SongSchema = new Schema(
         category: { type: String, required: true },
         genres: [{ type: String, required: false }],
         artists: [{ type: Object, required: false }],
-        // galery: [{ type: Object, required: false }],
         cover: { type: Object, required: true }, //va a tener url y public_id
         description: { type: String, required: true },
         stars: { type: Number, default: 0, required: true },

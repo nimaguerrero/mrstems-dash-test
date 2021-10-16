@@ -4,13 +4,14 @@ const { Schema, model } = require("mongoose");
 const TagSchema = new Schema(
     {
         name: { type: String, required: true },
-        link: { type: String, required: true },
+        link: { type: String, required: false },
         premium: { type: Boolean, required: true },
         song: {
             type: Schema.Types.ObjectId,
             ref: "Song",
             required: true,
         },
+        search_song: { type: String, required: true },
         price: { type: Number, required: false },
         nsales: { type: Number, default: 0, required: false },
         ndownloads: { type: Number, default: 0, required: true },

@@ -1,11 +1,11 @@
 const { Router } = require("express");
 
-const { createMessage } = require("./message.controller");
+const { createReport } = require("./report.controller");
 
 const { validateJWT } = require("../../middlewares/validate-jwt.middleware");
 
 const router = Router();
 
-router.post("/", validateJWT, createMessage);
+router.post("/", validateJWT, createReport);
 
 module.exports = router;
