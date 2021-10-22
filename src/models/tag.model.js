@@ -11,6 +11,7 @@ const TagSchema = new Schema(
             ref: "Song",
             required: true,
         },
+        time_download: { type: Number, required: false },
         search_song: { type: String, required: true },
         price: { type: Number, required: false },
         nsales: { type: Number, default: 0, required: false },

@@ -1,10 +1,10 @@
 const { Router } = require("express");
 
-const { getSongsByPage, getSongBySlug } = require("./song.controller");
+const { getSongsByPage, getSong } = require("./song.controller");
 
 const router = Router();
 
 router.get("/paginado", getSongsByPage);
-router.get("/:slug", getSongBySlug);
+router.get("/:id", getSong);
 
 module.exports = router;

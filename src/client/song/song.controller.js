@@ -1,5 +1,6 @@
 const { response, request } = require("express");
 const Song = require("../../models/song.model");
+const Tag = require("../../models/tag.model");
 const {
     conditionPrevious,
     conditionNext,
@@ -25,11 +26,19 @@ const getSongsByPage = async (req = request, res = response) => {
 
     try {
         const longitud = await Song.find({
-            $or: [{ name: regex }, { artist: regex }],
+            $or: [
+                { name: regex },
+                { tags_names: { $in: [regex] } },
+                { artists: { $in: [regex] } },
+            ],
         }).countDocuments();
         songs.longitud = longitud;
         songs.songs = await Song.find({
-            $or: [{ name: regex }, { artist: regex }],
+            $or: [
+                { name: regex },
+                { tags_names: { $in: [regex] } },
+                { artists: { $in: [regex] } },
+            ],
         })
             .limit(limit)
             .skip(startIndex);
@@ -53,10 +62,16 @@ const getSongsByPage = async (req = request, res = response) => {
     }
 };
 
-const getSongBySlug = async (req = request, res = response) => {
-    const slug = req.params.slug;
+const getSong = async (req = request, res = response) => {
+    const id = req.params.id;
+    let song = {
+        song: {},
+        tags: [],
+    };
     try {
-        const song = await Song.find({ slug });
+        song.song = await Song.findById(id);
+        const idSong = song.song.id;
+        song.tags = await Tag.find({ song: idSong });
         res.json({
             ok: true,
             song,
@@ -72,5 +87,5 @@ const getSongBySlug = async (req = request, res = response) => {
 
 module.exports = {
     getSongsByPage,
-    getSongBySlug,
+    getSong,
 };

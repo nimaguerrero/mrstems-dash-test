@@ -27,12 +27,7 @@ const sidebar = async (req = request, res = response) => {
             {
                 title: "Tags",
                 link: "/panel/tags",
-                icon: "document-lock-outline",
-            },
-            {
-                title: "Reportes",
-                link: "/panel/reports",
-                icon: "chatbubble-outline",
+                icon: "pricetags-outline",
             },
             { title: "Pedidos", link: "/panel/orders", icon: "cart-outline" },
             {

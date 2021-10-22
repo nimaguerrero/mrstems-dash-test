@@ -2,9 +2,9 @@ const { Router } = require("express");
 
 const {
     getAllOrdersByPage,
-    getClientOrdersByPage,
     getOrder,
     updateStateOrder,
+    cancelOrder,
 } = require("./order.controller");
 const { validateJWT } = require("../../middlewares/validate-jwt.middleware");
 const { validateUSER_or_ADMIN } = require("../../middlewares/role.middleware");
@@ -16,16 +16,8 @@ router.get(
     [validateJWT, validateUSER_or_ADMIN],
     getAllOrdersByPage
 );
-router.get(
-    "/paginado/:clientID",
-    [validateJWT, validateUSER_or_ADMIN],
-    getClientOrdersByPage
-);
 router.get("/:id", [validateJWT, validateUSER_or_ADMIN], getOrder);
-router.put(
-    "/:id/:state",
-    [validateJWT, validateUSER_or_ADMIN],
-    updateStateOrder
-);
+router.put("/:id", [validateJWT, validateUSER_or_ADMIN], updateStateOrder);
+router.patch("/:id", [validateJWT, validateUSER_or_ADMIN], cancelOrder);
 
 module.exports = router;

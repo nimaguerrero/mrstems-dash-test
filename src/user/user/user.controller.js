@@ -3,6 +3,10 @@ const User = require("../../models/user.model");
 const { createToken } = require("../../helpers/jwt.helper");
 const bcrypt = require("bcryptjs");
 
+const fs = require("fs-extra"); //soporte a las promesas
+const { v4: uuid_v4 } = require("uuid");
+const cloudinary = require("cloudinary");
+
 const registerUser = async (req, res = response) => {
     const { email, password } = req.body;
     try {
@@ -70,7 +74,7 @@ const loginUser = async (req, res = response) => {
 };
 
 const updateUser = async (req = request, res = response) => {
-    const newUser = req.body;
+    const { password, ...newUser } = req.body;
     const id = req.params.id;
     try {
         const searchID = await User.findById(id);
@@ -82,7 +86,7 @@ const updateUser = async (req = request, res = response) => {
             });
         }
 
-        if (newUser.email != searchId.email) {
+        if (newUser.email != searchID.email) {
             const searchEmail = await User.findOne({ email: newUser.email });
             if (searchEmail) {
                 return res.status(404).json({
@@ -91,6 +95,33 @@ const updateUser = async (req = request, res = response) => {
                     user: {},
                 });
             }
+        }
+
+        if (req.file) {
+            await cloudinary.v2.uploader.destroy(newUser.public_id);
+            const result = await cloudinary.v2.uploader.upload(
+                req.file.path,
+                {
+                    resource_type: "image",
+                    public_id: `mrstems/users/${uuid_v4()}`,
+                    overwrite: true,
+                },
+                (error, result) => {
+                    if (error) {
+                        console.log(error);
+                        return {
+                            url: "",
+                            public_id: "",
+                        };
+                    }
+                    return result;
+                }
+            );
+            newUser.profile = {
+                url: result.url,
+                public_id: result.public_id,
+            };
+            await fs.unlink(req.file.path);
         }
 
         const user = await User.findByIdAndUpdate(id, newUser, {
@@ -110,8 +141,45 @@ const updateUser = async (req = request, res = response) => {
     }
 };
 
+const getProfile = async (req = request, res = response) => {
+    const uid = req.uid;
+    console.log(uid);
+    try {
+        const { profile } = await User.findById(uid);
+        res.json({
+            ok: true,
+            url: profile.url,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error inesperado... revisar logs",
+        });
+    }
+};
+
+const getUser = async (req = request, res = response) => {
+    const uid = req.uid;
+    try {
+        const user = await User.findById(uid);
+        res.json({
+            ok: true,
+            user,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error inesperado... revisar logs",
+        });
+    }
+};
+
 module.exports = {
+    getProfile,
     registerUser,
     loginUser,
+    getUser,
     updateUser,
 };

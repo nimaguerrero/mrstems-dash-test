@@ -10,6 +10,7 @@ const {
     fillPagesArr,
 } = require("../../helpers/pages.helper");
 
+var fs = require("fs");
 const handlebars = require("handlebars");
 const ejs = require("ejs");
 const nodemailer = require("nodemailer");

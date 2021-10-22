@@ -119,7 +119,7 @@ const createSong = async (req = request, res = response) => {
             url: result.url,
             public_id: result.public_id,
         };
-        newSong.slug = newSong.name.toLowerCase().replace(/ /g, "-");
+        // newSong.slug = newSong.name.toLowerCase().replace(/ /g, "-");
         await newSong.save();
         await fs.unlink(req.file.path);
 

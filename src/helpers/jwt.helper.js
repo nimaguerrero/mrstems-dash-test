@@ -2,13 +2,13 @@ const jwt = require("jwt-simple");
 const moment = require("moment");
 
 const createToken = (user) => {
-    const { _id, name, lastname, email, profile, role, active } = user;
+    const { _id, name, lastname, email, role, active } = user;
     const payload = {
         uid: _id,
         name,
         lastname,
         email,
-        profile,
+        // profile, //no se puede poner porque no se actualiza cuando lo cambias
         role, //ver si es factible
         active,
         iat: moment().unix(),

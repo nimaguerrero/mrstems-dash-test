@@ -35,7 +35,42 @@ const getCategories = async (req = request, res = response) => {
     }
 };
 
+const getBlackLogo = async (req = request, res = response) => {
+    const idConfig = process.env.IDCONFIG;
+    try {
+        const { logo } = await Config.findById(idConfig);
+        res.json({
+            ok: true,
+            logo,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error inesperado... revisar logs",
+        });
+    }
+};
+const getWhiteLogo = async (req = request, res = response) => {
+    const idConfig = process.env.IDCONFIG;
+    try {
+        const { logo_white } = await Config.findById(idConfig);
+        res.json({
+            ok: true,
+            logo: logo_white,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error inesperado... revisar logs",
+        });
+    }
+};
+
 module.exports = {
     getDelivery,
     getCategories,
+    getWhiteLogo,
+    getBlackLogo,
 };

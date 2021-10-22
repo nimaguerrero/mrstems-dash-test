@@ -54,6 +54,23 @@ const getReportsByPage = async (req = request, res = response) => {
     }
 };
 
+getCountPendingReports = async (req = request, res = response) => {
+    try {
+        const count = await Report.find({
+            state: "Pendiente",
+        }).countDocuments();
+        res.json({
+            count,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error inesperado... revisar logs",
+        });
+    }
+};
+
 const responseReport = async (req = request, res = response) => {
     const id = req.params.id;
     const { state } = req.body;
@@ -83,6 +100,7 @@ const responseReport = async (req = request, res = response) => {
 };
 
 module.exports = {
+    getCountPendingReports,
     getReportsByPage,
     responseReport,
 };

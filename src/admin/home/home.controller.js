@@ -1,6 +1,9 @@
 const { response, request } = require("express");
 const Sale = require("../../models/sale.model");
 const SaleDetail = require("../../models/sale-detail.model");
+const Tag = require("../../models/tag.model");
+const Client = require("../../models/client.model");
+const { combineArrayCount } = require("../../helpers/combineArray.helper");
 
 const totalSales = async (req = request, res = response) => {
     try {
@@ -102,24 +105,7 @@ const graphSaleXMonth = async (req = request, res = response) => {
                 };
             }
         });
-        let dup = [];
-        let nuevoObjeto = {};
-        series.forEach((d, i, ds) => {
-            dup[i] = d.value; //200
-            if (!nuevoObjeto.hasOwnProperty(d.name)) {
-                nuevoObjeto[d.name] = dup[i];
-            } else {
-                nuevoObjeto[ds[i - 1].name] = dup[i - 1] + dup[i];
-            }
-        });
-        Object.keys(nuevoObjeto).forEach((k, i) => (series[i].name = k));
-        Object.values(nuevoObjeto).forEach((k, i) => (series[i].value = k));
-        const lengthborrar = Number(
-            series.length - Object.keys(nuevoObjeto).length
-        );
-        for (let i = 0; i < lengthborrar; i++) {
-            series.pop();
-        }
+        series = combineArrayCount(series);
 
         res.json({
             ok: true,
@@ -134,8 +120,83 @@ const graphSaleXMonth = async (req = request, res = response) => {
     }
 };
 
+const bestSellingTags = async (req = request, res = response) => {
+    try {
+        let onlyComplete = await Sale.find({ state: "Completado" }, { _id: 1 });
+        let tags = await SaleDetail.find(
+            { nsale: onlyComplete },
+            { tag: 1, _id: 0 }
+        ).populate("tag", "name");
+        tags = tags.map(({ tag }) => {
+            return {
+                name: tag.name,
+                value: 1,
+            };
+        });
+        tags = combineArrayCount(tags);
+
+        res.json({
+            ok: true,
+            tags,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error inesperado... revisar logs",
+        });
+    }
+};
+
+const bestSellingSongs = async (req = request, res = response) => {
+    const limit = req.params.limit;
+    try {
+        let songs = await Tag.find(
+            {},
+            { name: 4, nsales: 3, link: 2, search_song: 1, _id: 0 }
+        ).limit(limit);
+        songs = songs.map(({ name, nsales, link, search_song }) => {
+            return {
+                name: `${name} - ${search_song}`,
+                count: nsales,
+                link,
+            };
+        });
+
+        res.json({
+            ok: true,
+            songs,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error inesperado... revisar logs",
+        });
+    }
+};
+
+const countClients = async (req = request, res = response) => {
+    try {
+        const count = await Client.find({}).countDocuments();
+        res.json({
+            ok: true,
+            count,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error inesperado... revisar logs",
+        });
+    }
+};
+
 module.exports = {
+    countClients,
     totalSales,
     totalSalesByMonth,
     graphSaleXMonth,
+    bestSellingSongs,
+    bestSellingTags,
 };

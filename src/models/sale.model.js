@@ -4,6 +4,7 @@ const { Schema, model } = require("mongoose");
 const SaleSchema = new Schema(
     {
         client: { type: Schema.Types.ObjectId, ref: "Client" },
+        client_search: { type: String, required: true },
         nsale: { type: String, required: true },
         subtotal: { type: Number, required: false },
         total: { type: Number, required: true },

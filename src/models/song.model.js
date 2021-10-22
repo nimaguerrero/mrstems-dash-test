@@ -4,12 +4,11 @@ const { Schema, model, models } = require("mongoose");
 const SongSchema = new Schema(
     {
         name: { type: String, required: true },
-        slug: { type: String, required: false },
         author: { type: String, required: false },
         release_year: { type: String, required: false },
         album: { type: String, required: false },
         multimedia: { type: String, required: false },
-        category: { type: String, required: true },
+        tags_names: { type: Array, required: false },
         genres: [{ type: String, required: false }],
         artists: [{ type: Object, required: false }],
         cover: { type: Object, required: true }, //va a tener url y public_id
