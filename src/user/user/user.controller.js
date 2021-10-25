@@ -52,6 +52,13 @@ const loginUser = async (req, res = response) => {
             });
         }
 
+        if (!user.active) {
+            return res.status(404).json({
+                ok: false,
+                msg: "Usuario inactivo, por favor consulte con el administrador",
+            });
+        }
+
         const validPass = bcrypt.compareSync(password, user.password);
         if (!validPass) {
             return res.status(404).json({

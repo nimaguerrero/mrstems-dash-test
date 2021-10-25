@@ -207,7 +207,8 @@ const updateUser = async (req = request, res = response) => {
 
 const deactivateUser = async (req = request, res = Response) => {
     const id = req.params.id;
-    const inactive = { $set: { active: false } };
+    const { active } = req.body;
+    const inactive = { $set: { active } };
     try {
         await User.findByIdAndUpdate(id, inactive);
         res.json({

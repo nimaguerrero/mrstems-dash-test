@@ -1,4 +1,5 @@
 const { response, request } = require("express");
+const Tag = require("../../models/tag.model");
 const Sale = require("../../models/sale.model");
 const SaleDetail = require("../../models/sale-detail.model");
 const {
@@ -77,10 +78,7 @@ const getOrder = async (req = request, res = response) => {
             "client",
             "name lastname email"
         );
-        const details = await SaleDetail.find({ nsale: id }).populate(
-            "tag",
-            "name price premium link time_download"
-        );
+        const details = await SaleDetail.find({ nsale: id }).populate("tag");
         res.json({
             ok: true,
             order,
@@ -99,10 +97,11 @@ const updateStateOrder = async (req = request, res = response) => {
     const id = req.params.id;
     const logo =
         "https://res.cloudinary.com/gigga/image/upload/v1633831250/mrstems/mrstems_d6m2st.png";
-    const { state, link, time_download } = req.body;
+    const { state, link, time_download, tagid } = req.body;
     try {
         await Sale.findByIdAndUpdate(id, { $set: { state } });
         await sendTicket(id, link, time_download, logo, res);
+        await Tag.findByIdAndUpdate(tagid, { $inc: { nsales: 1 } });
     } catch (error) {
         console.log(error);
         res.status(500).json({

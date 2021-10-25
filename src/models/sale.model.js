@@ -11,7 +11,7 @@ const SaleSchema = new Schema(
         igv: { type: Number, required: true },
         transaction: { type: String, required: true },
         coupon: { type: String, required: false },
-        state: { type: String, default: "Procesando", required: true },
+        state: { type: String, default: "Pendiente", required: true },
         phone: { type: String, required: true },
         note: { type: String },
         createdAt: { type: Date, default: Date.now, required: true },

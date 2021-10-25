@@ -1,6 +1,7 @@
 const { response, request } = require("express");
 const Tag = require("../../models/tag.model");
 const Song = require("../../models/song.model");
+const Setting = require("../../models/setting.model");
 const {
     conditionPrevious,
     conditionNext,
@@ -71,6 +72,23 @@ const getTag = async (req = request, res = response) => {
     }
 };
 
+const getTagsOfSettings = async (req = request, res = response) => {
+    const idSetting = process.env.IDCONFIG;
+    try {
+        const { tags } = await Setting.findById(idSetting);
+        res.json({
+            ok: true,
+            tags,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error inesperado... revisar logs",
+        });
+    }
+};
+
 const createTag = async (req = request, res = response) => {
     try {
         const tag = new Tag(req.body);
@@ -81,11 +99,13 @@ const createTag = async (req = request, res = response) => {
             song.state.split(" ").includes("tag") ||
             song.state.split(" ").includes("tags")
         ) {
-            const s = Number(song.state.split(" ")[0]);
-            song.state = `${s + 1} tags`;
+            const ntag = Number(song.state.split(" ")[0]);
+            // NO LE COLOCO IF NTAG=3 PORQUE PUEDE TENER MAS DE 3 CON REMIX NIMA TU PONES COMPLETO EN ACTUALIZAR CANCION
+            song.state = `${ntag + 1} tags`;
         } else {
             song.state = "1 tag";
         }
+        song.tags_names.push(tag.name);
         await song.save();
 
         res.json({
@@ -118,6 +138,11 @@ const updateTag = async (req = request, res = response) => {
         const tag = await Tag.findByIdAndUpdate(id, newTag, {
             new: true,
         });
+
+        const song = await Song.findById(tag.song);
+        song.tags_names = tag.name;
+        await song.save();
+
         res.json({
             ok: true,
             msg: "Tag actualizado",
@@ -135,10 +160,28 @@ const updateTag = async (req = request, res = response) => {
 const deleteTag = async (req = request, res = Response) => {
     const id = req.params.id;
     try {
-        await Tag.findByIdAndDelete(id);
+        const tag = await Tag.findByIdAndDelete(id);
+        const song = await Song.findById(tag.song);
+
+        song.tags_names.pop();
+
+        let ntag = Number(song.state.split(" ")[0]);
+
+        // TODO: MEJORARLO EN UN FUTURO CON [] y endsWith
+        if (ntag > 2) {
+            song.state = `${ntag - 1} tags`;
+        } else {
+            ntag == 1
+                ? (song.state = "Edicion")
+                : (song.state = `${ntag - 1} tag`);
+        }
+        if (song.state === "Completo") song.state = `${ntag - 1} tags`;
+
+        await song.save();
+
         res.json({
             ok: true,
-            msg: "Cupon eliminado",
+            msg: "Tag eliminado",
         });
     } catch (error) {
         console.log(error);
@@ -150,6 +193,7 @@ const deleteTag = async (req = request, res = Response) => {
 };
 
 module.exports = {
+    getTagsOfSettings,
     getTagsByPage,
     getTag,
     createTag,

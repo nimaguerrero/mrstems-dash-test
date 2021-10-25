@@ -35,6 +35,7 @@ Versiones usadas:
 + mongoose@6.0.8
 + morgan@1.10.0
 + bcryptjs@2.4.3
++
 ```
 
 _Y repite_

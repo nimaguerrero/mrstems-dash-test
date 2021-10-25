@@ -8,6 +8,7 @@ const { combineArrayCount } = require("../../helpers/combineArray.helper");
 const totalSales = async (req = request, res = response) => {
     try {
         const totalA = await Sale.find({}, { total: 1, _id: 0 });
+
         const totalB = [];
         let total = 0;
         totalA.forEach((t, i) => {
@@ -36,6 +37,15 @@ const totalSalesByMonth = async (req = request, res = response) => {
             {},
             { createdAt: 1, total: 2, _id: 0 }
         );
+
+        if (!fecha_total) {
+            res.status(404).json({
+                ok: false,
+                msg: "No hay ventas",
+                total: 0,
+            });
+        }
+
         let total = 0;
 
         fecha_total.forEach((f) => {
@@ -93,6 +103,15 @@ const graphSaleXMonth = async (req = request, res = response) => {
             {},
             { createdAt: 1, total: 2, _id: 0 }
         );
+
+        if (!fecha_total) {
+            res.status(404).json({
+                ok: false,
+                msg: "No hay ventas",
+                total: 0,
+            });
+        }
+
         let series = [];
 
         fecha_total.forEach((f, i) => {
@@ -123,10 +142,20 @@ const graphSaleXMonth = async (req = request, res = response) => {
 const bestSellingTags = async (req = request, res = response) => {
     try {
         let onlyComplete = await Sale.find({ state: "Completado" }, { _id: 1 });
+
+        if (!onlyComplete) {
+            res.status(404).json({
+                ok: false,
+                msg: "No hay ventas",
+                tags: [{ name: "No hay ventas", value: 0 }],
+            });
+        }
+
         let tags = await SaleDetail.find(
             { nsale: onlyComplete },
             { tag: 1, _id: 0 }
         ).populate("tag", "name");
+
         tags = tags.map(({ tag }) => {
             return {
                 name: tag.name,
@@ -149,17 +178,28 @@ const bestSellingTags = async (req = request, res = response) => {
 };
 
 const bestSellingSongs = async (req = request, res = response) => {
-    const limit = req.params.limit;
+    const limit = Number(req.params.limit);
     try {
         let songs = await Tag.find(
             {},
-            { name: 4, nsales: 3, link: 2, search_song: 1, _id: 0 }
-        ).limit(limit);
-        songs = songs.map(({ name, nsales, link, search_song }) => {
+            { name: 4, nsales: 3, price: 2, search_song: 1, _id: 0 }
+        )
+            .limit(limit)
+            .sort({ nsales: -1 });
+
+        if (!songs) {
+            res.status(404).json({
+                ok: false,
+                msg: "No hay canciones",
+                songs: [],
+            });
+        }
+
+        songs = songs.map(({ name, nsales, price, search_song }) => {
             return {
                 name: `${name} - ${search_song}`,
                 count: nsales,
-                link,
+                total: price * nsales,
             };
         });
 
@@ -178,7 +218,7 @@ const bestSellingSongs = async (req = request, res = response) => {
 
 const countClients = async (req = request, res = response) => {
     try {
-        const count = await Client.find({}).countDocuments();
+        const count = await Client.find({ test: false }).countDocuments();
         res.json({
             ok: true,
             count,

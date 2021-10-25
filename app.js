@@ -30,7 +30,10 @@ const users = require("./src/user/user.module");
 // Client
 const clients = require("./src/client/client.module");
 
+// Sidebar
 const SidebarRoutes = require("./src/sidebar/sidebar.routes");
+
+const { backupAll } = require("./backup");
 
 // Multer para imagenes
 const storage = multer.diskStorage({
@@ -48,6 +51,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 dbConnection();
+backupAll();
 
 // CORS
 // app.use(CORS);

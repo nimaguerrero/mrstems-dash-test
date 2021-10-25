@@ -1,3 +1,5 @@
+-   Usuario y cliente estaban mal en su funcion de desactivar
+
 ## Martes 19 de octubre 2021
 
 `Cliente`

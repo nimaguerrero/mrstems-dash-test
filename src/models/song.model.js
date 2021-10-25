@@ -8,7 +8,7 @@ const SongSchema = new Schema(
         release_year: { type: String, required: false },
         album: { type: String, required: false },
         multimedia: { type: String, required: false },
-        tags_names: { type: Array, required: false },
+        tags_names: { type: Array, required: true, default: [] },
         genres: [{ type: String, required: false }],
         artists: [{ type: Object, required: false }],
         cover: { type: Object, required: true }, //va a tener url y public_id

@@ -14,6 +14,7 @@ const registerClient = async (req = request, res = response) => {
                 msg: "Correo ya está registrado",
             });
         }
+
         // Creando un nuevo cliente
         const newClient = new Client(req.body);
 
@@ -49,6 +50,13 @@ const loginClient = async (req = request, res = response) => {
             res.status(404).json({
                 ok: false,
                 msg: "Correo no encontrado",
+            });
+        }
+
+        if (!client.active) {
+            res.status(404).json({
+                ok: false,
+                msg: "Usted no puede entrar a la pagina, contactese con el administrador",
             });
         }
 

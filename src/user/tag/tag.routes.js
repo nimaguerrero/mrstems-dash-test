@@ -6,6 +6,7 @@ const {
     createTag,
     updateTag,
     deleteTag,
+    getTagsOfSettings,
 } = require("./tag.controller");
 
 const { validateJWT } = require("../../middlewares/validate-jwt.middleware");
@@ -14,6 +15,11 @@ const { validateUSER_or_ADMIN } = require("../../middlewares/role.middleware");
 
 const router = Router();
 
+router.get(
+    "/settings",
+    [validateJWT, validateUSER_or_ADMIN],
+    getTagsOfSettings
+);
 router.get("/paginado", [validateJWT, validateUSER_or_ADMIN], getTagsByPage);
 router.get("/:id", [validateJWT, validateUSER_or_ADMIN], getTag);
 
