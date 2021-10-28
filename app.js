@@ -33,8 +33,6 @@ const clients = require("./src/client/client.module");
 // Sidebar
 const SidebarRoutes = require("./src/sidebar/sidebar.routes");
 
-const { backupAll } = require("./backup");
-
 // Multer para imagenes
 const storage = multer.diskStorage({
     destination: path.join(__dirname, "src/public/uploads"),
@@ -51,13 +49,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 dbConnection();
-backupAll();
 
 // CORS
 // app.use(CORS);
 app.use(cors());
 
 // Admin
+app.use("/admins/backups", admins.AdminBackupRoutes);
 app.use("/admins/clients", admins.AdminClientRoutes);
 app.use("/admins/settings", admins.AdminSettingRoutes);
 app.use("/admins/users", admins.AdminUserRoutes);
