@@ -85,10 +85,9 @@ app.use("/clients/songs", clients.ClientSongRoutes);
 // Sidebar
 app.use("/sidebar", SidebarRoutes);
 
-// TODO: Lo último PARA PRODUCCION
-// app.get('*', (req, res) => {
-//     res.sendFile( path.resolve( __dirname, 'public/index.html' ) );
-// });
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "src/public/index.html"));
+});
 
 app.listen(app.get("port"), () => {
     console.log(`Server on port ${app.get("port")}`);
