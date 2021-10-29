@@ -37,11 +37,11 @@ const clients = require("./src/client/client.module");
 const SidebarRoutes = require("./src/sidebar/sidebar.routes");
 
 // settings
-app.set("port", process.env.PORT || 4201);
+app.set("port", process.env.PORT || 3000);
 
 // Multer para imagenes
 const storage = multer.diskStorage({
-    destination: path.join(__dirname, "src/public/uploads"),
+    destination: path.join(__dirname, "public/uploads"),
     filename: (req, file, cb) => {
         cb(null, new Date().getTime() + path.extname(file.originalname));
     },
@@ -53,6 +53,9 @@ app.use(morgan("tiny"));
 app.use(express.json());
 ////  Leer de formularios
 app.use(express.urlencoded({ extended: true }));
+
+// Directorio publico
+app.use(express.static("public"));
 
 dbConnection();
 
@@ -86,7 +89,7 @@ app.use("/clients/songs", clients.ClientSongRoutes);
 app.use("/sidebar", SidebarRoutes);
 
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "src/public/index.html"));
+    res.sendFile(path.resolve(__dirname, "public/index.html"));
 });
 
 app.listen(app.get("port"), () => {
