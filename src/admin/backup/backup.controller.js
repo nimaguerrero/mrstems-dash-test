@@ -37,7 +37,7 @@ const backup = async (req = request, res = response) => {
         )}`;
         let directory = path.join(dir, archive);
         const options = [
-            `--uri=${process.env.MONGO_ATLAS}`,
+            `--uri=${process.env.MONGODB_URI}`,
             `--out=${directory}`,
         ];
         // const options = ["--db=mrstems", `--out=${directory}`];
@@ -66,7 +66,7 @@ const backupCompressed = async (req = request, res = response) => {
         let directory = path.join(dir, archive);
 
         const options = [
-            `--uri=${process.env.MONGO_ATLAS}`,
+            `--uri=${process.env.MONGODB_URI}`,
             `--archive=${directory}`,
             "--gzip",
         ];
@@ -92,7 +92,7 @@ const backupCollection = async (req = request, res = response) => {
     try {
         const directory = path.join(dir, `${collection}.json`);
         const options = [
-            `--uri=${process.env.MONGO_ATLAS}`,
+            `--uri=${process.env.MONGODB_URI}`,
             `--collection=${collection}`,
             `--out=${directory}`,
         ];
@@ -116,10 +116,10 @@ const restore = async (req = request, res = response) => {
     const { directory } = req.body;
     try {
         if (directory.length > 0) {
-            const options = [`--uri=${process.env.MONGO_ATLAS}`, directory];
+            const options = [`--uri=${process.env.MONGODB_URI}`, directory];
             // LOCAL CON .gzip
             // const options = [
-            //     `--uri=${process.env.MONGO_ATLAS}`,
+            //     `--uri=${process.env.MONGODB_URI}`,
             //     `--archive=${directory}`,
             //     "--gzip",
             // ];
@@ -157,7 +157,7 @@ const restoreCollection = async (req = request, res = response) => {
             //     archivo
             // );
             const options = [
-                `--uri=${process.env.MONGO_ATLAS}`,
+                `--uri=${process.env.MONGODB_URI}`,
                 directory,
                 // `--archive=${directory}`,
             ];

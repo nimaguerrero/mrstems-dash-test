@@ -1,5 +1,3 @@
-"use strict";
-
 // por el cross-end si el entorno no es produccion importa variables de entorno locales
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
@@ -13,12 +11,17 @@ const multer = require("multer");
 const path = require("path");
 const cloudinary = require("cloudinary");
 
-const { dbConnection } = require("./src/database/config");
+const { dbConnection } = require("./database");
+const {
+    CLOUDINARY_CLOUD_NAME,
+    CLOUDINARY_API_KEY,
+    CLOUDINARY_API_SECRET,
+} = require("./src/config/production");
 
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
+    cloud_name: CLOUDINARY_CLOUD_NAME,
+    api_key: CLOUDINARY_API_KEY,
+    api_secret: CLOUDINARY_API_SECRET,
 });
 
 // Admin
@@ -32,6 +35,9 @@ const clients = require("./src/client/client.module");
 
 // Sidebar
 const SidebarRoutes = require("./src/sidebar/sidebar.routes");
+
+// settings
+app.set("port", process.env.PORT || 4201);
 
 // Multer para imagenes
 const storage = multer.diskStorage({
@@ -68,7 +74,7 @@ app.use("/users/tags", users.UserTagRoutes);
 app.use("/users/orders", users.UserOrderRoutes);
 app.use("/users", users.UserRoutes);
 
-// Client
+// Clients
 app.use("/clients", clients.ClientRoutes);
 app.use("/clients/settings", clients.ClientSettingRoutes);
 app.use("/clients/orders", clients.ClientOrderRoutes);
@@ -84,6 +90,6 @@ app.use("/sidebar", SidebarRoutes);
 //     res.sendFile( path.resolve( __dirname, 'public/index.html' ) );
 // });
 
-app.listen(process.env.MONGO_PORT, () => {
-    console.log("Servidor corriendo en puerto " + process.env.MONGO_PORT);
+app.listen(app.get("port"), () => {
+    console.log(`Server on port ${app.get("port")}`);
 });

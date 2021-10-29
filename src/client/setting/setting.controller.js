@@ -1,8 +1,9 @@
 const { response, request } = require("express");
 const Config = require("../../models/setting.model");
+const { IDCONFIG } = require("../../config/production");
 
 const getDelivery = async (req = request, res = response) => {
-    const idConfig = process.env.IDCONFIG;
+    const idConfig = IDCONFIG;
     try {
         const { delivery } = await Config.findById(idConfig);
         res.json({
@@ -19,7 +20,7 @@ const getDelivery = async (req = request, res = response) => {
 };
 
 const getCategories = async (req = request, res = response) => {
-    const idConfig = process.env.IDCONFIG;
+    const idConfig = IDCONFIG;
     try {
         const { categories } = await Config.findById(idConfig);
         res.json({
@@ -36,7 +37,7 @@ const getCategories = async (req = request, res = response) => {
 };
 
 const getBlackLogo = async (req = request, res = response) => {
-    const idConfig = process.env.IDCONFIG;
+    const idConfig = IDCONFIG;
     try {
         const { logo } = await Config.findById(idConfig);
         res.json({
@@ -52,7 +53,7 @@ const getBlackLogo = async (req = request, res = response) => {
     }
 };
 const getWhiteLogo = async (req = request, res = response) => {
-    const idConfig = process.env.IDCONFIG;
+    const idConfig = IDCONFIG;
     try {
         const { logo_white } = await Config.findById(idConfig);
         res.json({

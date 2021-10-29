@@ -17,6 +17,8 @@ const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
 const path = require("path");
 
+const { IDCONFIG } = require("../../config/production");
+
 const getClientOrdersByPage = async (req = request, res = response) => {
     const client = req.uid;
 
@@ -86,7 +88,7 @@ const createOrder = async (req = request, res = response) => {
     const client = req.uid;
     const { details, ...sale } = req.body;
     try {
-        const idSetting = process.env.IDCONFIG;
+        const idSetting = IDCONFIG;
         const { serie, correlative } = await Setting.findById(idSetting);
 
         const newSale = new Sale(sale);

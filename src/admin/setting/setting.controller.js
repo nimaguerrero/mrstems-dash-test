@@ -3,9 +3,10 @@ const Setting = require("../../models/setting.model");
 const fs = require("fs-extra"); //soporte a las promesas
 const { v4: uuid_v4 } = require("uuid");
 const cloudinary = require("cloudinary");
+const { IDCONFIG } = require("../../config/production");
 
 const getSetting = async (req = request, res = response) => {
-    const idSetting = process.env.IDCONFIG;
+    const idSetting = IDCONFIG;
     try {
         const setting = await Setting.findById(idSetting);
         console.log(setting);
@@ -23,7 +24,7 @@ const getSetting = async (req = request, res = response) => {
 };
 
 const updateSetting = async (req = request, res = response) => {
-    const idSetting = process.env.IDCONFIG;
+    const idSetting = IDCONFIG;
     const newS = req.body;
     const pidLogo = newS.pidLogo;
     const pidLogoWhite = newS.pidLogoWhite;

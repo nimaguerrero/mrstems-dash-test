@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { response, request } = require("express");
+const { JWT_SECRET } = require("../config/production");
 
 const validateJWT = async (req = request, res = response, next) => {
     // Leer el Token
@@ -13,7 +14,7 @@ const validateJWT = async (req = request, res = response, next) => {
     }
 
     try {
-        const verificar = jwt.verify(token, process.env.JWT_SECRET);
+        const verificar = jwt.verify(token, JWT_SECRET);
         const { uid } = verificar;
         req.uid = uid;
 

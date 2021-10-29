@@ -7,6 +7,7 @@ const {
     conditionNext,
     fillPagesArr,
 } = require("../../helpers/pages.helper");
+const { IDCONFIG } = require("../../config/production");
 
 const getTagsByPage = async (req = request, res = response) => {
     const term = req.query.term;
@@ -73,7 +74,7 @@ const getTag = async (req = request, res = response) => {
 };
 
 const getTagsOfSettings = async (req = request, res = response) => {
-    const idSetting = process.env.IDCONFIG;
+    const idSetting = IDCONFIG;
     try {
         const { tags } = await Setting.findById(idSetting);
         res.json({
