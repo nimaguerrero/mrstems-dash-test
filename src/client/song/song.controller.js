@@ -64,17 +64,17 @@ const getSongsByPage = async (req = request, res = response) => {
 
 const getSong = async (req = request, res = response) => {
     const id = req.params.id;
-    let song = {
+    let songObj = {
         song: {},
         tags: [],
     };
     try {
-        song.song = await Song.findById(id);
-        const idSong = song.song.id;
-        song.tags = await Tag.find({ song: idSong });
+        songObj.song = await Song.findById(id);
+        const idSong = songObj.song._id;
+        songObj.tags = await Tag.find({ song: idSong });
         res.json({
             ok: true,
-            song,
+            song: songObj,
         });
     } catch (error) {
         console.log(error);

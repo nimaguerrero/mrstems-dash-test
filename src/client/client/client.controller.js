@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const { createToken } = require("../../helpers/jwt.helper");
 
 const registerClient = async (req = request, res = response) => {
-    const { email, password } = req.body;
+    const { fullname, email, password } = req.body;
     try {
         // Comprobar si ya existe el correo
         const existEmail = await Client.findOne({ email });
@@ -83,6 +83,23 @@ const loginClient = async (req = request, res = response) => {
     }
 };
 
+const getProfile = async (req = request, res = response) => {
+    const uid = req.uid;
+    try {
+        const { profile } = await Client.findById(uid);
+        res.json({
+            ok: true,
+            url: profile.url,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error inesperado... revisar logs",
+        });
+    }
+};
+
 const updateClient = async (req = request, res = response) => {
     const newClient = req.body;
     const id = req.params.id;
@@ -130,4 +147,5 @@ module.exports = {
     registerClient,
     loginClient,
     updateClient,
+    getProfile,
 };

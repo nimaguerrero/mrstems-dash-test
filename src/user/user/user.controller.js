@@ -150,7 +150,6 @@ const updateUser = async (req = request, res = response) => {
 
 const getProfile = async (req = request, res = response) => {
     const uid = req.uid;
-    console.log(uid);
     try {
         const { profile } = await User.findById(uid);
         res.json({

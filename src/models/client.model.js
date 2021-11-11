@@ -3,8 +3,7 @@ const { Schema, model } = require("mongoose");
 
 const ClientSchema = new Schema(
     {
-        name: { type: String, required: true },
-        lastname: { type: String, required: true },
+        fullname: { type: String, required: true },
         country: { type: String, required: false, default: "Peru" },
         email: { type: String, required: true },
         password: { type: String, required: true },
@@ -12,8 +11,8 @@ const ClientSchema = new Schema(
             type: Object,
             required: true,
             default: {
-                url: "https://res.cloudinary.com/gigga/image/upload/v1633757380/mrstems/no-user_w9qnac.jpg",
-                public_id: "mrstems/no-user_w9qnac",
+                url: "https://res.cloudinary.com/gigga/image/upload/v1633757380/mrstems/no-user_c2w7q2.png",
+                public_id: "mrstems/no-user_c2w7q2",
             },
         },
         phone: { type: String, required: false },

@@ -3,11 +3,10 @@ const moment = require("moment");
 const { JWT_SECRET } = require("../config/production");
 
 const createToken = (user) => {
-    const { _id, name, lastname, email, role, active } = user;
+    const { _id, fullname, email, role, active } = user;
     const payload = {
         uid: _id,
-        name,
-        lastname,
+        fullname,
         email,
         // profile, //no se puede poner porque no se actualiza cuando lo cambias
         role, //ver si es factible
