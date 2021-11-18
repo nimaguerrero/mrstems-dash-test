@@ -1,5 +1,4 @@
 "use strict";
-const { v4: uuid_v4 } = require("uuid");
 const { Schema, model } = require("mongoose");
 
 const UserSchema = new Schema(
@@ -24,7 +23,7 @@ const UserSchema = new Schema(
             default: "USER",
             required: true,
         },
-        recovery_key: { type: String, required: true, default: uuid_v4() },
+        recovery_key: { type: Object, required: false },
         birthday: { type: String, required: false },
         dni: { type: String, required: false },
         active: { type: Boolean, default: true, required: true },

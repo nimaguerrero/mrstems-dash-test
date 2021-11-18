@@ -8,7 +8,7 @@ const {
     fillPagesArr,
 } = require("../../helpers/pages.helper");
 
-var fs = require("fs");
+const fs = require("fs");
 const handlebars = require("handlebars");
 const ejs = require("ejs");
 const nodemailer = require("nodemailer");
@@ -97,10 +97,11 @@ const updateStateOrder = async (req = request, res = response) => {
     const id = req.params.id;
     const logo =
         "https://res.cloudinary.com/gigga/image/upload/v1633831250/mrstems/mrstems_d6m2st.png";
-    const { state, link, time_download, tagid } = req.body;
+    // const { state, link, time_download, tagid } = req.body;
+    const { state, link, tagid } = req.body;
     try {
         await Sale.findByIdAndUpdate(id, { $set: { state } });
-        await sendTicket(id, link, time_download, logo, res);
+        await sendTicket(id, link, logo, res);
         await Tag.findByIdAndUpdate(tagid, { $inc: { nsales: 1 } });
     } catch (error) {
         console.log(error);
@@ -111,7 +112,7 @@ const updateStateOrder = async (req = request, res = response) => {
     }
 };
 
-const sendTicket = async (id, link, time_download, logo, res) => {
+const sendTicket = async (id, link, logo, res) => {
     const readHTMLFile = function (path, callback) {
         fs.readFile(path, { encoding: "utf-8" }, function (err, html) {
             if (err) {

@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose");
 
 const ReportSchema = new Schema(
     {
-        tag: { type: Schema.Types.ObjectId, ref: "Tag", required: true },
+        tag: { type: Object, required: true }, //name, search_song
         email: { type: String, required: true },
         problem: { type: String, required: true },
         state: { type: String, required: true, default: "Pendiente" },

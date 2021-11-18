@@ -9,7 +9,6 @@ const getSetting = async (req = request, res = response) => {
     const idSetting = IDCONFIG;
     try {
         const setting = await Setting.findById(idSetting);
-        console.log(setting);
         res.json({
             ok: true,
             setting,

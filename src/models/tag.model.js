@@ -5,7 +5,7 @@ const TagSchema = new Schema(
     {
         name: { type: String, required: true },
         link: { type: String, required: false },
-        premium: { type: Boolean, required: true },
+        // premium: { type: Boolean, required: true },
         song: {
             type: Schema.Types.ObjectId,
             ref: "Song",
