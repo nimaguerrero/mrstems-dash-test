@@ -1,0 +1,71 @@
+@use "../abstracts/colors" as c;
+
+.d-none {
+  display: none;
+  transition: 0.55s ease-in-out;
+}
+
+.router-link-active {
+  text-decoration: underline;
+  color: c.$white-color;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.line-h-2 {
+  line-height: 2;
+}
+
+.d-flex-around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.disabled {
+  background-color: c.$text-color;
+  pointer-events: none;
+}
+.text-center {
+  text-align: center;
+}
+
+.text-danger {
+  color: c.$danger;
+}
+
+.drop-blue {
+  border-radius: 7px;
+  background-image: c.$primary-color-rgba;
+}
+
+.user-img {
+  width: 40px;
+  height: 40px;
+}
+
+.img-circle {
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.user-td {
+  display: flex;
+  align-items: center;
+  word-break: keep-all;
+  &__text {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    span {
+      color: c.$dark-color;
+      margin-top: -1rem;
+    }
+  }
+  .user-img {
+    margin-top: 0.8rem;
+  }
+}

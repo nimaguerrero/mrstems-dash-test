@@ -1,0 +1,21 @@
+@use "../abstracts/colors" as c;
+.tag {
+  display: inline-block;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.5em;
+}
+
+.tag--primary {
+  background-color: c.$primary-color;
+  color: c.$white-color;
+}
+
+.tag--danger {
+  background-color: c.$danger;
+  color: c.$white-color;
+}
+
+.tag--secondary {
+  background-color: c.$secondary-color;
+  color: c.$white-color;
+}

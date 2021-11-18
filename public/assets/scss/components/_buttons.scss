@@ -1,0 +1,60 @@
+@use "../abstracts/colors" as c;
+@use "../utilities/flow" as f;
+
+.btn {
+  background: none;
+  border: 0;
+  box-sizing: border-box;
+  padding: 1em 2em;
+  font-size: inherit;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 2px solid c.$primary-color;
+  border-radius: f.$border-radius;
+}
+
+.btn--primary {
+  background-color: c.$primary-color;
+  color: c.$white-color;
+  &:disabled {
+    background-color: c.$text-color;
+  }
+}
+.btn--secondary {
+  background-color: c.$secondary-color;
+  color: c.$white-color;
+  &:disabled {
+    background-color: c.$text-color;
+  }
+}
+.btn--options {
+  border-color: 1px solid rgba(0, 0, 0, 0.08);
+  color: c.$dark-color;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn--sm {
+  padding: 0.7rem 1.2rem;
+}
+
+.btn--tag {
+  padding: 0.5rem 1rem;
+  border-radius: 1em;
+}
+
+.btn--login {
+  padding: 0.5rem 3rem;
+  @media screen and (min-width: 768px) {
+    padding: 0.5rem 1rem;
+  }
+}
+.btn--danger {
+  background-color: c.$warning;
+  color: c.$white-color;
+}
+.btn--icon {
+  padding: 0.4rem 0.9rem;
+}

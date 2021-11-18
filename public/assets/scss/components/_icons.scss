@@ -1,0 +1,11 @@
+@use "../abstracts/colors" as c;
+
+.icon--blue {
+  color: c.$third-color;
+}
+.icon--purple {
+  color: c.$primary-color;
+}
+.icon--danger {
+  color: c.$danger;
+}

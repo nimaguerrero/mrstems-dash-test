@@ -1,0 +1,19 @@
+@use "../abstracts/colors";
+
+.arrow-back {
+    color: colors.$white-color;
+    cursor: pointer;
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.arrow-back-tag {
+    width: 7rem;
+    border-radius: var(--border-radius);
+    background-color: colors.$primary-color;
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    margin: 0 auto;
+}

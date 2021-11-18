@@ -1,0 +1,92 @@
+@use "../abstracts/colors" as c;
+@use "../base/typography" as t;
+
+.td-options {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  ion-icon {
+    font-size: t.$t4;
+    margin-right: 0.5rem;
+    transition: 0.4s scale;
+    &:hover {
+      transform: scale(1.12);
+      --ionicon-stroke-width: 2.5rem;
+    }
+  }
+}
+
+.rwd-table {
+  margin: 1em 0;
+  width: 100%;
+  background-color: c.$white-color;
+  color: c.$dark-color;
+  border-radius: 0.4em;
+  overflow: hidden;
+
+  tr {
+    border-color: lighten(#222, 10%);
+    border-bottom: 1px solid c.$text-color-alt;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  th {
+    display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!
+  }
+
+  td {
+    display: block;
+
+    &:first-child {
+      padding-top: 0.5em;
+    }
+    &:last-child {
+      padding-bottom: 0.5em;
+    }
+
+    &:before {
+      content: attr(data-th) ": "; // who knew you could do this? The internet, that's who.
+      font-weight: bold;
+      width: 6.5em; // magic number :( adjust according to your own content
+      display: inline-block;
+      @media (min-width: 480px) {
+        display: none;
+      }
+    }
+  }
+
+  th,
+  td {
+    text-align: left;
+    margin: 0.5em 1em;
+    word-break: keep-all;
+
+    @media (min-width: 480px) {
+      padding: 1em;
+      display: table-cell;
+      padding: 0.25em 0.5em;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+  .th-center {
+    text-align: center;
+  }
+
+  th,
+  td:before {
+    color: c.$third-color;
+  }
+}
+
+.empty-table {
+  text-align: center;
+}

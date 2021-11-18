@@ -1,0 +1,139 @@
+@use "../abstracts/colors" as c;
+@use "../abstracts/breakpoints" as bp;
+@use "../base/typography" as *;
+@use "sass:math";
+
+body {
+  font-family: "Lato", sans-serif;
+  scroll-behavior: smooth;
+  background-color: c.$body-color;
+  color: c.$text-color;
+  min-height: 100vh;
+  font-size: $base-font;
+}
+
+h1,
+.t1 {
+  font-size: $t1;
+  color: c.$dark-color;
+}
+h2,
+.t2 {
+  font-size: $t2;
+}
+h3,
+.t3 {
+  font-size: $t3;
+}
+h4,
+.t4 {
+  font-size: $t4;
+}
+
+@media screen and (max-width: map-get(bp.$bp-width, sm)) {
+  h1,
+  .t1 {
+    font-size: $t2;
+  }
+  h2,
+  .t2 {
+    font-size: $t3;
+  }
+  h3,
+  .t3 {
+    font-size: $t4;
+  }
+  h4,
+  .t4 {
+    font-size: $base-font;
+  }
+}
+
+h5,
+.t5,
+p,
+a {
+  font-size: math.div($base-font, $scale);
+}
+
+small,
+span,
+.text-sm {
+  font-size: $base-font;
+}
+
+ul {
+  list-style: none;
+}
+
+li,
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+// scroll
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px var(--white);
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(34, 34, 34, 0.5);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: c.$text-color-alt;
+}
+
+// h3 {
+//   letter-spacing: -1px;
+//   color: var(--blue);
+// }
+
+hr {
+  width: 94%;
+  height: 1px;
+  background-color: c.$third-color;
+}
+
+.container {
+  width: 100%;
+}
+
+.main {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  width: calc(100% - 300px);
+  margin-left: 300px;
+  background-color: var(--white);
+  transition: 0.5s;
+
+  @media screen and (max-width: 875px) {
+    width: calc(100% - 80px);
+    margin-left: 80px;
+  }
+  @media screen and (max-width: 675px) {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  &-active {
+    width: calc(100% - 80px);
+    margin-left: 80px;
+  }
+}

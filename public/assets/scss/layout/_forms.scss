@@ -1,0 +1,59 @@
+@use "../abstracts/colors" as c;
+
+.form {
+  padding: 1.8rem;
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  // grid-template-rows: repeat(auto-fill, minmax(2rem, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(2rem, 5rem));
+  gap: 1rem;
+  &__group {
+    position: relative;
+  }
+  .border-danger {
+    border-color: c.$danger;
+    &:hover {
+      border-color: c.$danger;
+    }
+  }
+  &__input {
+    width: 100%;
+    border: 2px solid c.$text-color-alt;
+    border-radius: 0.5rem;
+    font-family: inherit;
+    font-size: inherit;
+    color: c.$dark-color;
+    outline: none;
+    padding: 0.8rem;
+    background: none;
+    &:hover {
+      border-color: c.$third-color;
+    }
+
+    &:focus {
+      border-color: c.$third-color;
+    }
+    &:disabled {
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+  }
+  &__label {
+    position: absolute;
+    left: 1rem;
+    top: 0.8rem;
+    -webkit-transition: top 200ms ease-in, left 200ms ease-in,
+      font-size 200ms ease-in;
+    transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+    background-color: c.$white-color;
+  }
+}
+
+.form__input:focus ~ .form__label,
+.form__input:not(:placeholder-shown).form__input:not(:focus) ~ .form__label {
+  top: -0.5rem;
+  font-size: 0.8rem;
+  left: 0.8rem;
+}

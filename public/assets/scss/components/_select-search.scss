@@ -1,0 +1,16 @@
+.ss__label {
+  margin-bottom: 12px;
+}
+
+.ss__input {
+  border: 2px solid lightslategray;
+  height: 40px;
+  border-radius: 3px;
+  padding: 5px;
+  font-size: 1rem;
+}
+
+.ss__input:focus {
+  outline: none;
+  border: 2px solid darkslategray;
+}

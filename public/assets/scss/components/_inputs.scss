@@ -1,0 +1,14 @@
+@use "../abstracts/colors";
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid colors.$primary-color;
+    padding: 8px 0;
+    margin-bottom: 20px;
+    width: 100%;
+    color: colors.$text-color;
+}
