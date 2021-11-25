@@ -42,7 +42,8 @@
   }
   &__label {
     position: absolute;
-    left: 1rem;
+    left: 0;
+    // left: 1rem;
     top: 0.8rem;
     -webkit-transition: top 200ms ease-in, left 200ms ease-in,
       font-size 200ms ease-in;
@@ -55,5 +56,5 @@
 .form__input:not(:placeholder-shown).form__input:not(:focus) ~ .form__label {
   top: -0.5rem;
   font-size: 0.8rem;
-  left: 0.8rem;
+  left: 0;
 }
