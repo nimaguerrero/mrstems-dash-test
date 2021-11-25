@@ -97,31 +97,33 @@ const createSong = async (req = request, res = response) => {
     try {
         // const result = await cloudinary.v2.uploader.upload(req.file.path);
         // notification_url: "https://mysite.example.com/notify_endpoint"
-        const result = await cloudinary.v2.uploader.upload(
-            req.file.path,
-            {
-                resource_type: "image",
-                public_id: `mrstems/songs/${uuid_v4()}`,
-                overwrite: true,
-            },
-            (error, result) => {
-                if (error) {
-                    console.log(error);
-                    return {
-                        url: "",
-                        public_id: "",
-                    };
+        if (req.file) {
+            const result = await cloudinary.v2.uploader.upload(
+                req.file.path,
+                {
+                    resource_type: "image",
+                    public_id: `mrstems/songs/${uuid_v4()}`,
+                    overwrite: true,
+                },
+                (error, result) => {
+                    if (error) {
+                        console.log(error);
+                        return {
+                            url: "",
+                            public_id: "",
+                        };
+                    }
+                    return result;
                 }
-                return result;
-            }
-        );
-        newSong.cover = {
-            url: result.url,
-            public_id: result.public_id,
-        };
+            );
+            newSong.cover = {
+                url: result.url,
+                public_id: result.public_id,
+            };
+            await fs.unlink(req.file.path);
+        }
         // newSong.slug = newSong.name.toLowerCase().replace(/ /g, "-");
         await newSong.save();
-        await fs.unlink(req.file.path);
 
         res.json({
             ok: true,
@@ -220,7 +222,9 @@ const deleteSong = async (req = request, res = Response) => {
     const public_id = `mrstems/songs/${pid}`;
     try {
         await Song.findByIdAndDelete(id);
-        await cloudinary.v2.uploader.destroy(public_id);
+        if (pid && pid.length > 4) {
+            await cloudinary.v2.uploader.destroy(public_id);
+        }
         await Tag.deleteMany({ song: id });
         res.json({
             ok: true,

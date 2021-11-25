@@ -8,6 +8,10 @@ const SaleDetailSchema = new Schema(
         sale: { type: Schema.Types.ObjectId, ref: "Sale" },
         subtotal: { type: Number, required: true },
         amount: { type: Number, required: true },
+        client: { type: Schema.Types.ObjectId, ref: "Client", required: false },
+        client_name: { type: String, required: true },
+        client_lastname: { type: String, required: true },
+        client_email: { type: String, required: true },
         createdAt: { type: Date, default: Date.now, required: true },
     },
     { collection: "sale-details" }

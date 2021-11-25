@@ -5,14 +5,6 @@
     xmlns:o="urn:schemas-microsoft-com:office:office"
 >
     <head>
-        <!--[if gte mso 9]>
-            <xml>
-                <o:OfficeDocumentSettings>
-                    <o:AllowPNG />
-                    <o:PixelsPerInch>96</o:PixelsPerInch>
-                </o:OfficeDocumentSettings>
-            </xml>
-        <![endif]-->
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <meta
             name="viewport"
@@ -23,52 +15,49 @@
         <meta name="format-detection" content="address=no" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="x-apple-disable-message-reformatting" />
-        <!--[if !mso]><!-->
         <link
             href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&display=swap"
             rel="stylesheet"
         />
-        <!--<![endif]-->
         <title>Email Template</title>
-        <!--[if gte mso 9]>
-            <style type="text/css" media="all">
-                sup {
-                    font-size: 100% !important;
-                }
-            </style>
-        <![endif]-->
-        <!-- body, html, table, thead, tbody, tr, td, div, a, span { font-family: Arial, sans-serif !important; } -->
-
         <style type="text/css" media="screen">
+            :root {
+                --first-color: #6a67ce;
+                --second-color: #fc636b;
+                --dark-color: #141618;
+                --text-color: #53575a;
+                --white-color: #ffffff;
+                --body-bg: #fcfcfc;
+            }
             body {
-                padding: 0 !important;
-                margin: 0 auto !important;
-                display: block !important;
-                min-width: 100% !important;
-                width: 100% !important;
-                background: #f4ecfa;
+                padding: 0;
+                margin: 0 auto;
+                display: block;
+                min-width: 100%;
+                width: 100%;
+                background: var(--body-bg);
                 -webkit-text-size-adjust: none;
             }
             a {
-                color: #f3189e;
+                color: var(--first-color);
                 text-decoration: none;
             }
             p {
-                padding: 0 !important;
-                margin: 0 !important;
+                padding: 0;
+                margin: 0;
             }
             img {
-                margin: 0 !important;
-                -ms-interpolation-mode: bicubic; /* Allow smoother rendering of resized image in Internet Explorer */
+                margin: 0;
+                -ms-interpolation-mode: bicubic;
             }
 
             a[x-apple-data-detectors] {
-                color: inherit !important;
-                text-decoration: inherit !important;
-                font-size: inherit !important;
-                font-family: inherit !important;
-                font-weight: inherit !important;
-                line-height: inherit !important;
+                color: inherit;
+                text-decoration: inherit;
+                font-size: inherit;
+                font-family: inherit;
+                font-weight: inherit;
+                line-height: inherit;
             }
 
             .btn-16 a {
@@ -83,133 +72,141 @@
             }
 
             .l-white a {
-                color: #ffffff;
+                color: var(--white-color);
             }
             .l-black a {
-                color: #282828;
+                color: var(--dark-color);
             }
             .l-pink a {
-                color: #f3189e;
+                color: var(--first-color);
             }
             .l-grey a {
-                color: #6e6e6e;
+                color: var(--text-color);
             }
             .l-purple a {
-                color: #9128df;
+                color: var(--second-color);
             }
 
             .gradient {
-                background: linear-gradient(to right, #9028df 0%, #f3189e 100%);
+                background: linear-gradient(
+                    to right,
+                    var(--second-color) 0%,
+                    var(--first-color) 100%
+                );
             }
 
             .btn-secondary {
                 border-radius: 10px;
-                background: linear-gradient(to right, #9028df 0%, #f3189e 100%);
+                background: linear-gradient(
+                    to right,
+                    var(--second-color) 0%,
+                    var(--first-color) 100%
+                );
             }
 
             /* Mobile styles */
             @media only screen and (max-device-width: 480px),
                 only screen and (max-width: 480px) {
                 .mpx-10 {
-                    padding-left: 10px !important;
-                    padding-right: 10px !important;
+                    padding-left: 10px;
+                    padding-right: 10px;
                 }
 
                 .mpx-15 {
-                    padding-left: 15px !important;
-                    padding-right: 15px !important;
+                    padding-left: 15px;
+                    padding-right: 15px;
                 }
 
                 .mpb-15 {
-                    padding-bottom: 15px !important;
+                    padding-bottom: 15px;
                 }
 
                 u + .body .gwfw {
-                    width: 100% !important;
-                    width: 100vw !important;
+                    width: 100%;
+                    width: 100vw;
                 }
 
                 .td,
                 .m-shell {
-                    width: 100% !important;
-                    min-width: 100% !important;
+                    width: 100%;
+                    min-width: 100%;
                 }
 
                 .mt-left {
-                    text-align: left !important;
+                    text-align: left;
                 }
                 .mt-center {
-                    text-align: center !important;
+                    text-align: center;
                 }
                 .mt-right {
-                    text-align: right !important;
+                    text-align: right;
                 }
 
                 .me-left {
-                    margin-right: auto !important;
+                    margin-right: auto;
                 }
                 .me-center {
-                    margin: 0 auto !important;
+                    margin: 0 auto;
                 }
                 .me-right {
-                    margin-left: auto !important;
+                    margin-left: auto;
                 }
 
                 .mh-auto {
-                    height: auto !important;
+                    height: auto;
                 }
                 .mw-auto {
-                    width: auto !important;
+                    width: auto;
                 }
 
                 .fluid-img img {
-                    width: 100% !important;
-                    max-width: 100% !important;
-                    height: auto !important;
+                    width: 100%;
+                    max-width: 100%;
+                    height: auto;
                 }
 
                 .column,
                 .column-top,
                 .column-dir-top {
-                    float: left !important;
-                    width: 100% !important;
-                    display: block !important;
+                    float: left;
+                    width: 100%;
+                    display: block;
                 }
 
                 .m-hide {
-                    display: none !important;
-                    width: 0 !important;
-                    height: 0 !important;
-                    font-size: 0 !important;
-                    line-height: 0 !important;
-                    min-height: 0 !important;
+                    display: none;
+                    width: 0;
+                    height: 0;
+                    font-size: 0;
+                    line-height: 0;
+                    min-height: 0;
                 }
                 .m-block {
-                    display: block !important;
+                    display: block;
                 }
 
                 .mw-15 {
-                    width: 15px !important;
+                    width: 15px;
                 }
 
                 .mw-2p {
-                    width: 2% !important;
+                    width: 2%;
                 }
                 .mw-32p {
-                    width: 32% !important;
+                    width: 32%;
                 }
                 .mw-49p {
-                    width: 49% !important;
+                    width: 49%;
                 }
                 .mw-50p {
-                    width: 50% !important;
+                    width: 50%;
                 }
                 .mw-100p {
-                    width: 100% !important;
+                    width: 100%;
                 }
 
                 .mmt-0 {
-                    margin-top: 0 !important;
+                    margin-top: 0;
                 }
             }
         </style>
@@ -217,12 +214,12 @@
     <body
         class="body"
         style="
-            padding: 0 !important;
-            margin: 0 auto !important;
-            display: block !important;
-            min-width: 100% !important;
-            width: 100% !important;
-            background: #f4ecfa;
+            padding: 0;
+            margin: 0 auto;
+            display: block;
+            min-width: 100%;
+            width: 100%;
+            background: var(--body-bg);
             -webkit-text-size-adjust: none;
         "
     >
@@ -233,7 +230,7 @@
                 cellspacing="0"
                 cellpadding="0"
                 style="margin: 0; padding: 0; width: 100%; height: 100%"
-                bgcolor="#f4ecfa"
+                bgcolor="#fcfcfc"
                 class="gwfw"
             >
                 <tr>
@@ -270,66 +267,6 @@
                                     >
                                         <tr>
                                             <td class="mpx-10">
-                                                <!-- Top -->
-                                                <table
-                                                    width="100%"
-                                                    border="0"
-                                                    cellspacing="0"
-                                                    cellpadding="0"
-                                                >
-                                                    <tr>
-                                                        <td
-                                                            class="
-                                                                text-12
-                                                                c-grey
-                                                                l-grey
-                                                                a-right
-                                                                py-20
-                                                            "
-                                                            style="
-                                                                font-size: 12px;
-                                                                line-height: 16px;
-                                                                font-family: 'PT Sans',
-                                                                    Arial,
-                                                                    sans-serif;
-                                                                min-width: auto !important;
-                                                                color: #6e6e6e;
-                                                                text-align: right;
-                                                                padding-top: 20px;
-                                                                padding-bottom: 20px;
-                                                            "
-                                                        >
-                                                            <a
-                                                                href="#"
-                                                                target="_blank"
-                                                                class="
-                                                                    link
-                                                                    c-grey
-                                                                "
-                                                                style="
-                                                                    text-decoration: none;
-                                                                    color: #6e6e6e;
-                                                                "
-                                                                ><span
-                                                                    class="
-                                                                        link
-                                                                        c-grey
-                                                                    "
-                                                                    style="
-                                                                        text-decoration: none;
-                                                                        color: #6e6e6e;
-                                                                    "
-                                                                    >View this
-                                                                    email in
-                                                                    your
-                                                                    browser</span
-                                                                ></a
-                                                            >
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <!-- END Top -->
-
                                                 <!-- Container -->
                                                 <table
                                                     width="100%"
@@ -348,7 +285,7 @@
                                                                     10px 0 0;
                                                                 padding-top: 10px;
                                                             "
-                                                            bgcolor="#f3189e"
+                                                            bgcolor="#6a67ce"
                                                         >
                                                             <table
                                                                 width="100%"
@@ -423,14 +360,7 @@
                                                                                         cellpadding="0"
                                                                                     >
                                                                                         <tr>
-                                                                                            <td
-                                                                                                class="
-                                                                                                    pb-50
-                                                                                                "
-                                                                                                style="
-                                                                                                    padding-bottom: 50px;
-                                                                                                "
-                                                                                            >
+                                                                                            <td>
                                                                                                 <table
                                                                                                     width="100%"
                                                                                                     border="0"
@@ -442,27 +372,28 @@
                                                                                                             class="
                                                                                                                 fluid-img
                                                                                                                 img-center
-                                                                                                                pb-50
                                                                                                             "
                                                                                                             style="
                                                                                                                 font-size: 0pt;
                                                                                                                 line-height: 0pt;
                                                                                                                 text-align: center;
-                                                                                                                padding-bottom: 50px;
-                                                                                                                margin-top: 20px;
+                                                                                                                padding-bottom: 10px;
+                                                                                                                margin-top: 10px;
                                                                                                             "
                                                                                                         >
-                                                                                                            <!-- <img
-                                                                                                                src="https://res.cloudinary.com/gigga/image/upload/v1633831250/mrstems/mrstems_d6m2st.png"
+                                                                                                            <img
+                                                                                                                width="120px"
+                                                                                                                height="120px"
+                                                                                                                src="https://res.cloudinary.com/gigga/image/upload/v1634655484/mrstems/logo_sxx9ty.png"
                                                                                                                 border="0"
                                                                                                                 alt="logo"
-                                                                                                            /> -->
-                                                                                                            <img
+                                                                                                            />
+                                                                                                            <!-- <img
                                                                                                                 src="<%=
                                                                                                                 logo;%>"
                                                                                                                 border="0"
                                                                                                                 alt="logo"
-                                                                                                            />
+                                                                                                            /> -->
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                     <tr>
@@ -475,11 +406,13 @@
                                                                                                             style="
                                                                                                                 font-size: 36px;
                                                                                                                 line-height: 40px;
-                                                                                                                color: #282828;
+                                                                                                                color: var(
+                                                                                                                    --dark-color
+                                                                                                                );
                                                                                                                 font-family: 'PT Sans',
                                                                                                                     Arial,
                                                                                                                     sans-serif;
-                                                                                                                min-width: auto !important;
+                                                                                                                min-width: auto;
                                                                                                                 text-align: center;
                                                                                                                 padding-bottom: 15px;
                                                                                                             "
@@ -506,46 +439,38 @@
                                                                                                             "
                                                                                                             style="
                                                                                                                 font-size: 16px;
-                                                                                                                color: #6e6e6e;
+                                                                                                                color: var(
+                                                                                                                    --text-color
+                                                                                                                );
                                                                                                                 font-family: 'PT Sans',
                                                                                                                     Arial,
                                                                                                                     sans-serif;
-                                                                                                                min-width: auto !important;
+                                                                                                                min-width: auto;
                                                                                                                 line-height: 26px;
                                                                                                                 text-align: center;
                                                                                                                 padding-bottom: 25px;
                                                                                                             "
                                                                                                         >
-                                                                                                            Lorem
-                                                                                                            ipsum
-                                                                                                            dolor
-                                                                                                            sit,
-                                                                                                            amet
-                                                                                                            consectetur
-                                                                                                            adipisicing
-                                                                                                            elit.
-                                                                                                            Consectetur
-                                                                                                            quaerat
-                                                                                                            labore
-                                                                                                            dicta,
-                                                                                                            deserunt
-                                                                                                            eius
-                                                                                                            magnam,
-                                                                                                            omnis
-                                                                                                            enim
-                                                                                                            voluptatum
-                                                                                                            ullam
-                                                                                                            pariatur
-                                                                                                            exercitationem
-                                                                                                            nostrum
-                                                                                                            eaque
-                                                                                                            optio
-                                                                                                            repudiandae,
-                                                                                                            quisquam
-                                                                                                            porro
-                                                                                                            eum
-                                                                                                            temporibus
-                                                                                                            veritatis!
+                                                                                                            Tu
+                                                                                                            link
+                                                                                                            será
+                                                                                                            enviado
+                                                                                                            en
+                                                                                                            un
+                                                                                                            plazo
+                                                                                                            de
+                                                                                                            24
+                                                                                                            horas.
+                                                                                                            De
+                                                                                                            no
+                                                                                                            ser
+                                                                                                            entregado
+                                                                                                            en
+                                                                                                            el
+                                                                                                            plazo
+                                                                                                            puedes
+                                                                                                            reportarlo
+                                                                                                            aquí
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                     <tr>
@@ -568,7 +493,7 @@
                                                                                                                             c-white
                                                                                                                             l-white
                                                                                                                         "
-                                                                                                                        bgcolor="#f3189e"
+                                                                                                                        bgcolor="#6a67ce"
                                                                                                                         style="
                                                                                                                             font-size: 16px;
                                                                                                                             line-height: 20px;
@@ -581,12 +506,14 @@
                                                                                                                             font-weight: bold;
                                                                                                                             text-transform: uppercase;
                                                                                                                             border-radius: 25px;
-                                                                                                                            min-width: auto !important;
-                                                                                                                            color: #ffffff;
+                                                                                                                            min-width: auto;
+                                                                                                                            color: var(
+                                                                                                                                --white-color
+                                                                                                                            );
                                                                                                                         "
                                                                                                                     >
                                                                                                                         <a
-                                                                                                                            href=""
+                                                                                                                            href="https://mrstems.com/report"
                                                                                                                             target="_blank"
                                                                                                                             class="
                                                                                                                                 link
@@ -597,7 +524,9 @@
                                                                                                                                 padding: 15px
                                                                                                                                     35px;
                                                                                                                                 text-decoration: none;
-                                                                                                                                color: #ffffff;
+                                                                                                                                color: var(
+                                                                                                                                    --white-color
+                                                                                                                                );
                                                                                                                             "
                                                                                                                         >
                                                                                                                             <span
@@ -607,12 +536,11 @@
                                                                                                                                 "
                                                                                                                                 style="
                                                                                                                                     text-decoration: none;
-                                                                                                                                    color: #ffffff;
+                                                                                                                                    color: var(
+                                                                                                                                        --white-color
+                                                                                                                                    );
                                                                                                                                 "
-                                                                                                                                >Ir
-                                                                                                                                a
-                                                                                                                                mi
-                                                                                                                                cuenta</span
+                                                                                                                                >Reportar</span
                                                                                                                             >
                                                                                                                         </a>
                                                                                                                     </td>
@@ -655,7 +583,7 @@
                                                                                                                 img
                                                                                                             "
                                                                                                             height="1"
-                                                                                                            bgcolor="#ebebeb"
+                                                                                                            bgcolor="#e4e4e4"
                                                                                                             style="
                                                                                                                 font-size: 0pt;
                                                                                                                 line-height: 0pt;
@@ -739,12 +667,14 @@
                                                                                                                                     style="
                                                                                                                                         font-size: 20px;
                                                                                                                                         line-height: 24px;
-                                                                                                                                        color: #282828;
+                                                                                                                                        color: var(
+                                                                                                                                            --dark-color
+                                                                                                                                        );
                                                                                                                                         font-family: 'PT Sans',
                                                                                                                                             Arial,
                                                                                                                                             sans-serif;
                                                                                                                                         text-align: left;
-                                                                                                                                        min-width: auto !important;
+                                                                                                                                        min-width: auto;
                                                                                                                                         padding-bottom: 15px;
                                                                                                                                     "
                                                                                                                                 >
@@ -757,7 +687,9 @@
                                                                                                                                                 c-purple
                                                                                                                                             "
                                                                                                                                             style="
-                                                                                                                                                color: #9128df;
+                                                                                                                                                color: var(
+                                                                                                                                                    --second-color
+                                                                                                                                                );
                                                                                                                                             "
                                                                                                                                             >#<%=
                                                                                                                                             id;
@@ -775,12 +707,14 @@
                                                                                                                                     style="
                                                                                                                                         font-size: 20px;
                                                                                                                                         line-height: 24px;
-                                                                                                                                        color: #282828;
+                                                                                                                                        color: var(
+                                                                                                                                            --dark-color
+                                                                                                                                        );
                                                                                                                                         font-family: 'PT Sans',
                                                                                                                                             Arial,
                                                                                                                                             sans-serif;
                                                                                                                                         text-align: left;
-                                                                                                                                        min-width: auto !important;
+                                                                                                                                        min-width: auto;
                                                                                                                                         padding-bottom: 10px;
                                                                                                                                     "
                                                                                                                                 >
@@ -799,12 +733,14 @@
                                                                                                                                     style="
                                                                                                                                         font-size: 16px;
                                                                                                                                         line-height: 20px;
-                                                                                                                                        color: #6e6e6e;
+                                                                                                                                        color: var(
+                                                                                                                                            --text-color
+                                                                                                                                        );
                                                                                                                                         font-family: 'PT Sans',
                                                                                                                                             Arial,
                                                                                                                                             sans-serif;
                                                                                                                                         text-align: left;
-                                                                                                                                        min-width: auto !important;
+                                                                                                                                        min-width: auto;
                                                                                                                                     "
                                                                                                                                 >
                                                                                                                                     <%=
@@ -859,12 +795,14 @@
                                                                                                                                     style="
                                                                                                                                         font-size: 20px;
                                                                                                                                         line-height: 24px;
-                                                                                                                                        color: #282828;
+                                                                                                                                        color: var(
+                                                                                                                                            --dark-color
+                                                                                                                                        );
                                                                                                                                         font-family: 'PT Sans',
                                                                                                                                             Arial,
                                                                                                                                             sans-serif;
                                                                                                                                         text-align: left;
-                                                                                                                                        min-width: auto !important;
+                                                                                                                                        min-width: auto;
                                                                                                                                         padding-bottom: 10px;
                                                                                                                                     "
                                                                                                                                 >
@@ -881,23 +819,26 @@
                                                                                                                                     style="
                                                                                                                                         font-size: 16px;
                                                                                                                                         line-height: 20px;
-                                                                                                                                        color: #6e6e6e;
+                                                                                                                                        color: var(
+                                                                                                                                            --text-color
+                                                                                                                                        );
                                                                                                                                         font-family: 'PT Sans',
                                                                                                                                             Arial,
                                                                                                                                             sans-serif;
                                                                                                                                         text-align: left;
-                                                                                                                                        min-width: auto !important;
+                                                                                                                                        min-width: auto;
                                                                                                                                     "
                                                                                                                                 >
-                                                                                                                                    Mi
-                                                                                                                                    tienda
+                                                                                                                                    MrStems
                                                                                                                                     <br />
-                                                                                                                                    Paseo
-                                                                                                                                    del
-                                                                                                                                    Mar,
-                                                                                                                                    Surco
+                                                                                                                                    Tenemos
+                                                                                                                                    el
+                                                                                                                                    material
+                                                                                                                                    para
+                                                                                                                                    tus
+                                                                                                                                    mezclas
                                                                                                                                     <br />
-                                                                                                                                    Lima,
+                                                                                                                                    Piura,
                                                                                                                                     Perú
                                                                                                                                 </td>
                                                                                                                             </tr>
@@ -941,16 +882,18 @@
                                                                                                             style="
                                                                                                                 font-size: 20px;
                                                                                                                 line-height: 24px;
-                                                                                                                color: #282828;
+                                                                                                                color: var(
+                                                                                                                    --dark-color
+                                                                                                                );
                                                                                                                 font-family: 'PT Sans',
                                                                                                                     Arial,
                                                                                                                     sans-serif;
                                                                                                                 text-align: left;
-                                                                                                                min-width: auto !important;
+                                                                                                                min-width: auto;
                                                                                                             "
                                                                                                         >
                                                                                                             <strong
-                                                                                                                >Producto</strong
+                                                                                                                >Tag</strong
                                                                                                             >
                                                                                                         </td>
                                                                                                         <td
@@ -974,11 +917,13 @@
                                                                                                             style="
                                                                                                                 font-size: 20px;
                                                                                                                 line-height: 24px;
-                                                                                                                color: #282828;
+                                                                                                                color: var(
+                                                                                                                    --dark-color
+                                                                                                                );
                                                                                                                 font-family: 'PT Sans',
                                                                                                                     Arial,
                                                                                                                     sans-serif;
-                                                                                                                min-width: auto !important;
+                                                                                                                min-width: auto;
                                                                                                                 text-align: right;
                                                                                                             "
                                                                                                         >
@@ -1048,12 +993,14 @@
                                                                                                                         "
                                                                                                                         style="
                                                                                                                             font-size: 16px;
-                                                                                                                            color: #6e6e6e;
+                                                                                                                            color: var(
+                                                                                                                                --text-color
+                                                                                                                            );
                                                                                                                             font-family: 'PT Sans',
                                                                                                                                 Arial,
                                                                                                                                 sans-serif;
                                                                                                                             text-align: left;
-                                                                                                                            min-width: auto !important;
+                                                                                                                            min-width: auto;
                                                                                                                             line-height: 24px;
                                                                                                                         "
                                                                                                                     >
@@ -1113,11 +1060,13 @@
                                                                                                                         style="
                                                                                                                             font-size: 20px;
                                                                                                                             line-height: 24px;
-                                                                                                                            color: #282828;
+                                                                                                                            color: var(
+                                                                                                                                --dark-color
+                                                                                                                            );
                                                                                                                             font-family: 'PT Sans',
                                                                                                                                 Arial,
                                                                                                                                 sans-serif;
-                                                                                                                            min-width: auto !important;
+                                                                                                                            min-width: auto;
                                                                                                                             text-align: right;
                                                                                                                         "
                                                                                                                     >
@@ -1216,11 +1165,13 @@
                                                                                                                                     "
                                                                                                                                     style="
                                                                                                                                         font-size: 20px;
-                                                                                                                                        color: #282828;
+                                                                                                                                        color: var(
+                                                                                                                                            --dark-color
+                                                                                                                                        );
                                                                                                                                         font-family: 'PT Sans',
                                                                                                                                             Arial,
                                                                                                                                             sans-serif;
-                                                                                                                                        min-width: auto !important;
+                                                                                                                                        min-width: auto;
                                                                                                                                         line-height: 30px;
                                                                                                                                         text-align: right;
                                                                                                                                     "
@@ -1248,12 +1199,14 @@
                                                                                                                                     "
                                                                                                                                     style="
                                                                                                                                         font-size: 20px;
-                                                                                                                                        color: #282828;
+                                                                                                                                        color: var(
+                                                                                                                                            --dark-color
+                                                                                                                                        );
                                                                                                                                         font-family: 'PT Sans',
                                                                                                                                             Arial,
                                                                                                                                             sans-serif;
                                                                                                                                         text-align: left;
-                                                                                                                                        min-width: auto !important;
+                                                                                                                                        min-width: auto;
                                                                                                                                         line-height: 30px;
                                                                                                                                     "
                                                                                                                                 >
@@ -1270,11 +1223,13 @@
                                                                                                                                     "
                                                                                                                                     style="
                                                                                                                                         font-size: 20px;
-                                                                                                                                        color: #282828;
+                                                                                                                                        color: var(
+                                                                                                                                            --dark-color
+                                                                                                                                        );
                                                                                                                                         font-family: 'PT Sans',
                                                                                                                                             Arial,
                                                                                                                                             sans-serif;
-                                                                                                                                        min-width: auto !important;
+                                                                                                                                        min-width: auto;
                                                                                                                                         line-height: 30px;
                                                                                                                                         text-align: right;
                                                                                                                                     "
@@ -1302,12 +1257,14 @@
                                                                                                                                     "
                                                                                                                                     style="
                                                                                                                                         font-size: 20px;
-                                                                                                                                        color: #282828;
+                                                                                                                                        color: var(
+                                                                                                                                            --dark-color
+                                                                                                                                        );
                                                                                                                                         font-family: 'PT Sans',
                                                                                                                                             Arial,
                                                                                                                                             sans-serif;
                                                                                                                                         text-align: left;
-                                                                                                                                        min-width: auto !important;
+                                                                                                                                        min-width: auto;
                                                                                                                                         line-height: 30px;
                                                                                                                                     "
                                                                                                                                 >
@@ -1326,11 +1283,13 @@
                                                                                                                                     "
                                                                                                                                     style="
                                                                                                                                         font-size: 20px;
-                                                                                                                                        color: #282828;
+                                                                                                                                        color: var(
+                                                                                                                                            --dark-color
+                                                                                                                                        );
                                                                                                                                         font-family: 'PT Sans',
                                                                                                                                             Arial,
                                                                                                                                             sans-serif;
-                                                                                                                                        min-width: auto !important;
+                                                                                                                                        min-width: auto;
                                                                                                                                         line-height: 30px;
                                                                                                                                         text-align: right;
                                                                                                                                         padding-top: 10px;
@@ -1367,9 +1326,11 @@
                                                                                                                                             Arial,
                                                                                                                                             sans-serif;
                                                                                                                                         text-align: left;
-                                                                                                                                        min-width: auto !important;
+                                                                                                                                        min-width: auto;
                                                                                                                                         line-height: 30px;
-                                                                                                                                        color: #9128df;
+                                                                                                                                        color: var(
+                                                                                                                                            --second-color
+                                                                                                                                        );
                                                                                                                                         padding-top: 10px;
                                                                                                                                     "
                                                                                                                                 >
@@ -1439,74 +1400,19 @@
                                                                             font-family: 'PT Sans',
                                                                                 Arial,
                                                                                 sans-serif;
-                                                                            min-width: auto !important;
+                                                                            min-width: auto;
                                                                             line-height: 24px;
                                                                             text-align: center;
-                                                                            color: #ffffff;
+                                                                            color: var(
+                                                                                --white-color
+                                                                            );
                                                                             padding-bottom: 20px;
                                                                         "
                                                                     >
-                                                                        Av.
-                                                                        Paseo
-                                                                        del Mar,
-                                                                        Surco -
-                                                                        Lima
-                                                                        <br />
-                                                                        <a
-                                                                            href="tel:+17384796719"
-                                                                            target="_blank"
-                                                                            class="
-                                                                                link
-                                                                                c-white
-                                                                            "
-                                                                            style="
-                                                                                text-decoration: none;
-                                                                                color: #ffffff;
-                                                                            "
-                                                                            ><span
-                                                                                class="
-                                                                                    link
-                                                                                    c-white
-                                                                                "
-                                                                                style="
-                                                                                    text-decoration: none;
-                                                                                    color: #ffffff;
-                                                                                "
-                                                                                >(+51)
-                                                                                954
-                                                                                456
-                                                                                159</span
-                                                                            ></a
-                                                                        >
-                                                                        -
-                                                                        <a
-                                                                            href="tel:+13697181973"
-                                                                            target="_blank"
-                                                                            class="
-                                                                                link
-                                                                                c-white
-                                                                            "
-                                                                            style="
-                                                                                text-decoration: none;
-                                                                                color: #ffffff;
-                                                                            "
-                                                                            ><span
-                                                                                class="
-                                                                                    link
-                                                                                    c-white
-                                                                                "
-                                                                                style="
-                                                                                    text-decoration: none;
-                                                                                    color: #ffffff;
-                                                                                "
-                                                                                >(+51)
-                                                                                987
-                                                                                456
-                                                                                156</span
-                                                                            ></a
-                                                                        >
-                                                                        <br />
-                                                                        <a
+                                                                        MrStems
+
+                                                                        <!-- <br /> -->
+                                                                        <!-- <a
                                                                             href="mailto:info@website.com"
                                                                             target="_blank"
                                                                             class="
@@ -1515,7 +1421,9 @@
                                                                             "
                                                                             style="
                                                                                 text-decoration: none;
-                                                                                color: #ffffff;
+                                                                                color: var(
+                                                                                    --white-color
+                                                                                );
                                                                             "
                                                                             ><span
                                                                                 class="
@@ -1524,13 +1432,15 @@
                                                                                 "
                                                                                 style="
                                                                                     text-decoration: none;
-                                                                                    color: #ffffff;
+                                                                                    color: var(
+                                                                                        --white-color
+                                                                                    );
                                                                                 "
                                                                                 >informes@mitienda.com</span
                                                                             ></a
                                                                         >
-                                                                        -
-                                                                        <a
+                                                                        - -->
+                                                                        <!-- <a
                                                                             href="https://www.linajeperuano.com/"
                                                                             target="_blank"
                                                                             class="
@@ -1539,7 +1449,9 @@
                                                                             "
                                                                             style="
                                                                                 text-decoration: none;
-                                                                                color: #ffffff;
+                                                                                color: var(
+                                                                                    --white-color
+                                                                                );
                                                                             "
                                                                             ><span
                                                                                 class="
@@ -1548,11 +1460,13 @@
                                                                                 "
                                                                                 style="
                                                                                     text-decoration: none;
-                                                                                    color: #ffffff;
+                                                                                    color: var(
+                                                                                        --white-color
+                                                                                    );
                                                                                 "
                                                                                 >https://www.tudominio.com/</span
                                                                             ></a
-                                                                        >
+                                                                        > -->
                                                                     </td>
                                                                 </tr>
                                                             </table>

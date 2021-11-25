@@ -1,5 +1,6 @@
 const { response, request } = require("express");
 const Tag = require("../../models/tag.model");
+const Setting = require("../../models/setting.model");
 const Sale = require("../../models/sale.model");
 const SaleDetail = require("../../models/sale-detail.model");
 const {
@@ -14,6 +15,8 @@ const ejs = require("ejs");
 const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
 const path = require("path");
+
+const { IDCONFIG } = require("../../config/production");
 
 const getAllOrdersByPage = async (req = request, res = response) => {
     const term = req.query.term;
@@ -95,9 +98,10 @@ const getOrder = async (req = request, res = response) => {
 
 const updateStateOrder = async (req = request, res = response) => {
     const id = req.params.id;
-    const logo =
-        "https://res.cloudinary.com/gigga/image/upload/v1633831250/mrstems/mrstems_d6m2st.png";
-    // const { state, link, time_download, tagid } = req.body;
+
+    const idSetting = IDCONFIG;
+    const { logo } = await Setting.findById(idSetting);
+
     const { state, link, tagid } = req.body;
     try {
         await Sale.findByIdAndUpdate(id, { $set: { state } });
@@ -135,6 +139,7 @@ const sendTicket = async (id, link, logo, res) => {
         })
     );
 
+    // TODO: CAMBIAR AQUI
     const venta = await Sale.findById(id).populate("client");
     const cliente = `${venta.client.name} ${venta.client.lastname}`;
 
@@ -142,7 +147,6 @@ const sendTicket = async (id, link, logo, res) => {
         let rest_html = ejs.render(html, {
             cliente,
             link,
-            time_download,
             logo,
         });
 

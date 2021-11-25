@@ -17,6 +17,9 @@ const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
 const path = require("path");
 
+const {
+    formatDateToSpanish,
+} = require("../../helpers/formatDateToSpanish.helper");
 const { IDCONFIG } = require("../../config/production");
 
 const getClientOrdersByPage = async (req = request, res = response) => {
@@ -89,43 +92,35 @@ const createOrder = async (req = request, res = response) => {
     const { details, ...sale } = req.body;
     try {
         const idSetting = IDCONFIG;
-        const { serie, correlative } = await Setting.findById(idSetting);
+        const { serie, correlative, logo } = await Setting.findById(idSetting);
 
         const newSale = new Sale(sale);
-        newSale.client = client;
+        if (client) newSale.client = client;
 
         const lastSale = await Sale.find().sort({ createdAt: -1 });
         if (lastSale.length > 0) {
             const sc = lastSale[0].sale.split("-");
             if (sc[1] !== "999999") {
                 const newCorrelative = zfill(Number(sc[1]) + 1, 6);
-                newSale.sale = `${serie} - ${newCorrelative}`;
+                newSale.nsale = `${serie} - ${newCorrelative}`;
             } else {
                 const newSerie = zfill(Number(sc[0]) + 1, 3);
-                newSale.sale = `${serie} - ${newSerie}`;
+                newSale.nsale = `${serie} - ${newSerie}`;
             }
         } else {
-            newSale.sale = `${serie} - ${correlative}`;
+            newSale.nsale = `${serie} - ${correlative}`;
         }
 
         await newSale.save();
 
-        let sdArr = [];
-
         details.forEach(async (detail) => {
             const newSaleDetail = new SaleDetail(detail);
-            newSaleDetail.client = client;
+            if (client) newSaleDetail.client = client;
             newSaleDetail.sale = newSale.id;
             await newSaleDetail.save();
-            sdArr.push(detail);
         });
 
-        res.json({
-            ok: true,
-            msg: "Se registro la venta exitosamente",
-            sale,
-            details: sdArr,
-        });
+        await sendTicket(newSale.id, logo.url, req, res);
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -135,9 +130,7 @@ const createOrder = async (req = request, res = response) => {
     }
 };
 
-const sendTicket = async (req = request, res = response) => {
-    const id = req.params.id;
-
+const sendTicket = async (id, logo, req = request, res = response) => {
     const readHTMLFile = function (path, callback) {
         fs.readFile(path, { encoding: "utf-8" }, function (err, html) {
             if (err) {
@@ -160,18 +153,19 @@ const sendTicket = async (req = request, res = response) => {
         })
     );
 
-    const venta = await Sale.findById(id).populate("client");
+    const venta = await Sale.findById(id);
     const detalles = await SaleDetail.find({ sale: id }).populate("tag");
-    const cliente = `${venta.client.name} ${venta.client.lastname}`;
-    const fecha = new Date(venta.createdAt);
+    const cliente = `${venta.client_name} ${venta.client_lastname}`;
+    const f = new Date(venta.createdAt);
+    const fecha = formatDateToSpanish(f);
     const data = detalles;
     const subtotal = venta.subtotal;
     const total = venta.total;
     const precio_envio = venta.igv;
-    //cliente _id fecha data subtotal
 
     readHTMLFile(process.cwd() + "/mail.html", (err, html) => {
         let rest_html = ejs.render(html, {
+            logo,
             data,
             cliente,
             id,
@@ -186,7 +180,7 @@ const sendTicket = async (req = request, res = response) => {
 
         let mailOptions = {
             from: "mrstems21@gmail.com",
-            to: venta.client.email,
+            to: venta.client_email,
             subject: "Gracias por tu compra, Mi Tienda",
             html: htmlToSend,
         };

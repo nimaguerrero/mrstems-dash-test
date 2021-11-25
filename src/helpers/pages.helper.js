@@ -1,9 +1,6 @@
 const conditionPrevious = (startIndex, page, limit) => {
     if (startIndex > 0) {
-        return {
-            page: page - 1,
-            limit,
-        };
+        return page - 1;
     } else {
         return null;
     }
@@ -11,10 +8,7 @@ const conditionPrevious = (startIndex, page, limit) => {
 
 const conditionNext = (endIndex, longitud, page, limit) => {
     if (endIndex < longitud) {
-        return {
-            page: page + 1,
-            limit,
-        };
+        return page + 1;
     } else {
         return null;
     }
