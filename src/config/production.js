@@ -8,4 +8,5 @@ module.exports = {
     CLOUDINARY_CLOUD_NAME: "gigga",
     CLOUDINARY_API_KEY: "181199762439377",
     CLOUDINARY_API_SECRET: "yggcrj1JGnhOCE--jxM4LarRmhE",
+    URI: "mongodb+srv://gigga2021:QHXt53pelUD4ZzR9@cluster0.s9nzg.mongodb.net/mrstems?retryWrites=true&w=majority",
 };

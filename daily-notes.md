@@ -1,3 +1,7 @@
+## Jueves 25 de diciembre 2021
+
+-   Backup corregido pero cambiar a futuro porque no me responde la uri solo al principio en la base de datos pero deberia poder reconocer los parametros de heroku
+
 -   Usuario y cliente estaban mal en su funcion de desactivar
 
 ## Martes 19 de octubre 2021

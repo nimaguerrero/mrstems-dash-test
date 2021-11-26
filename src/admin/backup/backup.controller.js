@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 const { request, response } = require("express");
 const mongoose = require("mongoose");
+const { URI } = require("../../config/production");
 
 // mongodump --db=mrstems --archive=ARCHIVE_PATH --gzip
 // mongorestore --db=mrstems --archive=ARCHIVE_PATH --gzip
@@ -36,10 +37,8 @@ const backup = async (req = request, res = response) => {
             7
         )}`;
         let directory = path.join(dir, archive);
-        const options = [
-            `--uri=${process.env.MONGODB_URI}`,
-            `--out=${directory}`,
-        ];
+        // `--uri=${process.env.MONGODB_URI}`,
+        const options = [`--uri=${URI}`, `--out=${directory}`];
         // const options = ["--db=mrstems", `--out=${directory}`];
         const info = await backConsole("mongodump", options);
         res.json({
@@ -65,11 +64,7 @@ const backupCompressed = async (req = request, res = response) => {
         )}.gzip`;
         let directory = path.join(dir, archive);
 
-        const options = [
-            `--uri=${process.env.MONGODB_URI}`,
-            `--archive=${directory}`,
-            "--gzip",
-        ];
+        const options = [`--uri=${URI}`, `--archive=${directory}`, "--gzip"];
 
         const info = await backConsole("mongodump", options);
         res.json({
@@ -92,7 +87,7 @@ const backupCollection = async (req = request, res = response) => {
     try {
         const directory = path.join(dir, `${collection}.json`);
         const options = [
-            `--uri=${process.env.MONGODB_URI}`,
+            `--uri=${URI}`,
             `--collection=${collection}`,
             `--out=${directory}`,
         ];
@@ -116,7 +111,7 @@ const restore = async (req = request, res = response) => {
     const { directory } = req.body;
     try {
         if (directory.length > 0) {
-            const options = [`--uri=${process.env.MONGODB_URI}`, directory];
+            const options = [`--uri=${URI}`, directory];
             // LOCAL CON .gzip
             // const options = [
             //     `--uri=${process.env.MONGODB_URI}`,
