@@ -59,7 +59,7 @@ const getTagsByPage = async (req = request, res = response) => {
 const getTag = async (req = request, res = response) => {
     const id = req.params.id;
     try {
-        const tag = await Tag.findById(id);
+        const tag = await Tag.findById(id).populate("song", "name");
         res.json({
             ok: true,
             tag,
