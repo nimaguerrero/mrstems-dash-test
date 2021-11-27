@@ -9,8 +9,10 @@
   font-size: inherit;
   vertical-align: middle;
   cursor: pointer;
-  border: 2px solid c.$primary-color;
   border-radius: f.$border-radius;
+  &:focus {
+    border: 2px solid c.$primary-color;
+  }
 }
 
 .btn--primary {
