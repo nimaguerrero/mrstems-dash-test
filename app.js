@@ -30,9 +30,6 @@ const admins = require("./src/admin/admin.module");
 // User
 const users = require("./src/user/user.module");
 
-// Client
-const clients = require("./src/client/client.module");
-
 // Sidebar
 const SidebarRoutes = require("./src/sidebar/sidebar.routes");
 
@@ -76,14 +73,6 @@ app.use("/users/songs", users.UserSongRoutes);
 app.use("/users/tags", users.UserTagRoutes);
 app.use("/users/orders", users.UserOrderRoutes);
 app.use("/users", users.UserRoutes);
-
-// Clients
-app.use("/clients", clients.ClientRoutes);
-app.use("/clients/settings", clients.ClientSettingRoutes);
-app.use("/clients/orders", clients.ClientOrderRoutes);
-app.use("/clients/reports", clients.ClientReportRoutes);
-app.use("/clients/reviews", clients.ClientReviewRoutes);
-app.use("/clients/songs", clients.ClientSongRoutes);
 
 // Sidebar
 app.use("/sidebar", SidebarRoutes);
