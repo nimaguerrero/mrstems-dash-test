@@ -25,8 +25,9 @@ const getSetting = async (req = request, res = response) => {
 const updateSetting = async (req = request, res = response) => {
   const idSetting = IDCONFIG;
   const newS = req.body;
+  console.log(newS);
   const pidLogo = newS.pidLogo;
-  const pidLogoWhite = newS.pidLogoWhite;
+  // const pidLogoWhite = newS.pidLogoWhite;
 
   try {
     const searchID = await Setting.findById(idSetting);
