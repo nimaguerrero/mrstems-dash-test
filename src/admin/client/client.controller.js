@@ -33,7 +33,8 @@ const getClientsByPage = async (req = request, res = response) => {
       $or: [{ name: regex }, { lastname: regex }, { email: regex }],
     })
       .limit(limit)
-      .skip(startIndex);
+      .skip(startIndex)
+      .sort({ createdAt: -1 });
 
     const lengthArr = Math.ceil(longitud / limit);
     clients.pages = fillPagesArr(lengthArr);
