@@ -13,6 +13,7 @@ const ReportSchema = new Schema(
     state: { type: String, required: true, default: "Pendiente" },
     createdAt: { type: Date, required: true, default: Date.now },
     note: { type: String, required: false },
+    transaction: { type: String, required: false },
   },
   { collection: "reports" }
 );
