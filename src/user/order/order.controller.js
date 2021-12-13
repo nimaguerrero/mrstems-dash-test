@@ -132,9 +132,8 @@ const sendTicket = async (id, link, logo, res) => {
     })
   );
 
-  // TODO: CAMBIAR AQUI
-  const venta = await Sale.findById(id).populate("client");
-  const cliente = `${venta.client.name} ${venta.client.lastname}`;
+  const venta = await Sale.findById(id);
+  const cliente = `${venta.client_name} ${venta.client_lastname}`;
 
   readHTMLFile(process.cwd() + "/send-link.html", (err, html) => {
     let rest_html = ejs.render(html, {
@@ -148,7 +147,7 @@ const sendTicket = async (id, link, logo, res) => {
 
     let mailOptions = {
       from: "mrstems21@gmail.com",
-      to: venta.client.email,
+      to: venta.client_email,
       subject: "Gracias por tu compra, Mi Tienda",
       html: htmlToSend,
     };
