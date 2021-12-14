@@ -182,9 +182,29 @@ const cancelOrder = async (req = request, res = response) => {
   }
 };
 
+const deleteOrder = async (req = request, res = Response) => {
+  const id = req.params.id;
+  try {
+    await Sale.findByIdAndDelete(id);
+    await SaleDetail.findOneAndDelete({ sale: id });
+
+    res.json({
+      ok: true,
+      msg: "Orden eliminada",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "Error inesperado... revisar logs",
+    });
+  }
+};
+
 module.exports = {
   getAllOrdersByPage,
   getOrder,
   updateStateOrder,
   cancelOrder,
+  deleteOrder,
 };
