@@ -97,12 +97,11 @@ const createTag = async (req = request, res = response) => {
     await tag.save();
 
     const song = await Song.findById(tag.song);
-    if (
-      song.state.split(" ").includes("tag") ||
-      song.state.split(" ").includes("tags")
-    ) {
-      const ntag = Number(song.state.split(" ")[0]);
-      // NO LE COLOCO IF NTAG=3 PORQUE PUEDE TENER MAS DE 3 CON REMIX NIMA TU PONES COMPLETO EN ACTUALIZAR CANCION
+
+    const stateSong = song.state.split(" ");
+
+    if (stateSong.includes("tag") || stateSong.includes("tags")) {
+      const ntag = Number(stateSong[0]);
       song.state = `${ntag + 1} tags`;
     } else {
       song.state = "1 tag";
@@ -128,8 +127,8 @@ const updateTag = async (req = request, res = response) => {
   const newTag = req.body;
   const id = req.params.id;
   try {
-    const searchID = await Tag.findById(id);
-    if (!searchID) {
+    const tagAnterior = await Tag.findById(id);
+    if (!tagAnterior) {
       return res.status(404).json({
         ok: true,
         msg: "Tag no encontrado por id",
@@ -142,7 +141,12 @@ const updateTag = async (req = request, res = response) => {
     });
 
     const song = await Song.findById(tag.song);
-    song.tags_names = tag.name;
+
+    if (tagAnterior.name != newTag.name) {
+      const existTag = song.tags_names.findIndex((t) => t === tagAnterior.name);
+      song.tags_names[existTag] = tag.name;
+    }
+
     await song.save();
 
     res.json({
