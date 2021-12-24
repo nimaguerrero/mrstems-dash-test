@@ -74,7 +74,7 @@ const getOrder = async (req = request, res = response) => {
       "client",
       "name lastname email"
     );
-    const details = await SaleDetail.find({ nsale: id }).populate("tag");
+    const details = await SaleDetail.find({ sale: id }).populate("tag");
     res.json({
       ok: true,
       order,
@@ -132,8 +132,11 @@ const sendTicket = async (id, link, logo, res) => {
     })
   );
 
-  const venta = await Sale.findById(id);
-  const cliente = `${venta.client_name} ${venta.client_lastname}`;
+  const venta = await Sale.findById(id).populate(
+    "client",
+    "name lastname email"
+  );
+  const cliente = `${venta.client.name} ${venta.client.lastname}`;
 
   readHTMLFile(process.cwd() + "/send-link.html", (err, html) => {
     let rest_html = ejs.render(html, {
@@ -147,7 +150,7 @@ const sendTicket = async (id, link, logo, res) => {
 
     let mailOptions = {
       from: "mrstems21@gmail.com",
-      to: venta.client_email,
+      to: venta.client.email,
       subject: "Gracias por tu compra, Mi Tienda",
       html: htmlToSend,
     };
