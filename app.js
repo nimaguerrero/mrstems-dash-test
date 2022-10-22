@@ -1,7 +1,7 @@
 // por el cross-end si el entorno no es produccion importa variables de entorno locales
-if (process.env.NODE_ENV !== "production") {
+//if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
-}
+// }
 
 const express = require("express");
 const app = express();
