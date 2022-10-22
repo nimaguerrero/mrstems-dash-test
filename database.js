@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { URI } = require("../../config/production");
+const { URI } = require("./src/config/production");
 
 const dbConnection = async () => {
     try {
